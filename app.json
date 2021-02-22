@@ -1,0 +1,12 @@
+{
+  "name": "EventsPro",
+  "displayName": "EventsPro",
+  "expo": {
+    "name": "EventsPro",
+    "slug": "EventsPro",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
