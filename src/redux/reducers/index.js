@@ -1,0 +1,42 @@
+import { combineReducers } from "redux";
+import {
+  LOGIN,
+  SIGNUP,
+  UPDATE_EMAIL,
+  UPDATE_PASSWORD,
+  UPDATE_NAME,
+} from "../actions/user";
+import { GET_EVENT } from "../actions/events";
+
+const user = (state = {}, action) => {
+  switch (action.type) {
+    case LOGIN:
+      return action.payload;
+    case SIGNUP:
+      return action.payload;
+    case UPDATE_EMAIL:
+      return { ...state, email: action.payload };
+    case UPDATE_PASSWORD:
+      return { ...state, password: action.payload };
+    case UPDATE_NAME:
+      return { ...state, name: action.payload };
+    default:
+      return state;
+  }
+};
+
+const events = (state = {}, action) => {
+  switch (action.type) {
+    case GET_EVENT:
+      return { ...state, event: action.payload };
+    default:
+      return state;
+  }
+};
+
+const rootReducer = combineReducers({
+  user,
+  events,
+});
+
+export default rootReducer;
