@@ -1,11 +1,11 @@
 import Firebase, { db } from "../../config/Firebase";
 
 //constants
-export const GET_EVENT = "GET_EVENT";
+export const GET_MY_EVENTS = "GET_MY_EVENTS";
 
 // actions
 
-export const getEvent = () => {
+export const getMyEvents = () => {
   return async (dispatch, getState) => {
     try {
       const currentuser = Firebase.auth().currentUser;
@@ -13,17 +13,19 @@ export const getEvent = () => {
       if (currentuser) {
         const res = await db
           .collection("events")
-          .doc("nz306PinMlynaTfTpPMC")
-          .collection("chat")
+          .where("owners", "array-contains", currentuser.uid)
           .get();
 
         if (res) {
+          const myEvents = [];
           res.forEach((doc) =>
-            console.log(doc.name + "=>" + doc.timeSent + "\n" + doc.message)
+            myEvents.push({
+              ...doc.data(),
+              id: doc.id,
+              ref: doc.ref,
+            })
           );
-          console.log(res);
-
-          dispatch({ type: GET_EVENT, payload: res });
+          dispatch({ type: GET_MY_EVENTS, payload: myEvents });
         }
       }
     } catch (e) {

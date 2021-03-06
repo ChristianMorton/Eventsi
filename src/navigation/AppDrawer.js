@@ -11,6 +11,7 @@ import {
   login,
   getUser,
 } from "../redux/actions/user";
+import HomeScreen from "../screens/HomeScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -33,6 +34,11 @@ const AppDrawer = ({ updateAuthState, getUser }) => {
       <Drawer.Screen name="Home">
         {(screenProps) => (
           <AppNavigator {...screenProps} updateAuthState={updateAuthState} />
+        )}
+      </Drawer.Screen>
+      <Drawer.Screen name="Main">
+        {(screenProps) => (
+          <HomeScreen {...screenProps} updateAuthState={updateAuthState} />
         )}
       </Drawer.Screen>
       <Drawer.Screen name="Settings">

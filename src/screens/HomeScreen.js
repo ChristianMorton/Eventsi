@@ -1,42 +1,58 @@
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, Text, StyleSheet, Button } from "react-native";
-import { Auth } from "aws-amplify";
+import {
+  SafeAreaView,
+  Text,
+  StyleSheet,
+  Button,
+  FlatList,
+  View,
+} from "react-native";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-const HomeScreen = ({ updateAuthState }) => {
-  const [name, setName] = useState("");
+const Item = ({ title }) => (
+  <View style={styles.item}>
+    <Text style={styles.title}>{title}</Text>
+  </View>
+);
 
-  const signOut = async () => {
-    try {
-      await Auth.signOut();
-      updateAuthState("loggedOut");
-    } catch (error) {
-      console.log("Error signing out", error);
-    }
-  };
-
-  const getUser = async () => {
-    try {
-      const AuthUser = await Auth.currentAuthenticatedUser();
-      setName(AuthUser.attributes.name);
-    } catch (err) {
-      console.log("Error getting user attributes", err);
-    }
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
+const HomeScreen = ({ updateAuthState, events }) => {
+  const renderItem = ({ item }) => <Item title={item.name} />;
 
   return (
-    <SafeAreaView>
-      <Text>Hello {name}</Text>
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={events.event}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+      />
       <StatusBar style="auto" />
-      <Button title="Sign Out" color="tomato" onPress={signOut} />
     </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
+  },
+  item: {
+    backgroundColor: "#f9c2ff",
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    fontSize: 32,
+  },
+});
 
-export default HomeScreen;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+    events: state.events,
+  };
+};
+
+export default connect(mapStateToProps)(HomeScreen);

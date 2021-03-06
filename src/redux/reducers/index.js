@@ -6,7 +6,7 @@ import {
   UPDATE_PASSWORD,
   UPDATE_NAME,
 } from "../actions/user";
-import { GET_EVENT } from "../actions/events";
+import { GET_MY_EVENTS } from "../actions/events";
 
 const user = (state = {}, action) => {
   switch (action.type) {
@@ -27,7 +27,7 @@ const user = (state = {}, action) => {
 
 const events = (state = {}, action) => {
   switch (action.type) {
-    case GET_EVENT:
+    case GET_MY_EVENTS:
       return { ...state, event: action.payload };
     default:
       return state;
