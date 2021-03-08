@@ -7,7 +7,7 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunkMiddleware from "redux-thunk";
 import reducer from "./src/redux/reducers";
-import AppDrawer from "./src/navigation/AppDrawer";
+import TabNavigator from "./src/navigation/TabNavigator";
 import AuthenticationNavigator from "./src/navigation/AuthenticationStack";
 
 const middleware = applyMiddleware(thunkMiddleware);
@@ -48,7 +48,7 @@ const App = () => {
       <NavigationContainer>
         {isUserLoggedIn === "initializing" && <Initializing />}
         {isUserLoggedIn === "loggedIn" && (
-          <AppDrawer updateAuthState={updateAuthState} />
+          <TabNavigator updateAuthState={updateAuthState} />
         )}
         {isUserLoggedIn === "loggedOut" && (
           <AuthenticationNavigator updateAuthState={updateAuthState} />

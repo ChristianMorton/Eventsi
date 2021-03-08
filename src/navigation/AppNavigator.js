@@ -9,14 +9,6 @@ const AppStack = createStackNavigator();
 export const AppNavigator = (props) => {
   return (
     <AppStack.Navigator initialRouteName="InitialLogin" headerMode="none">
-      <AppStack.Screen name="Home">
-        {(screenProps) => (
-          <HomeScreen
-            {...screenProps}
-            updateAuthState={props.updateAuthState}
-          />
-        )}
-      </AppStack.Screen>
       <AppStack.Screen name="InitialLogin">
         {(screenProps) => (
           <InitialScreen

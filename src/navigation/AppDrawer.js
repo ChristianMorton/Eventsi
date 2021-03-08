@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import SettingsScreen from "../screens/SettingsScreen";
 import { AppNavigator } from "./AppNavigator";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import Firebase from "../config/Firebase";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import {
@@ -16,19 +15,6 @@ import HomeScreen from "../screens/HomeScreen";
 const Drawer = createDrawerNavigator();
 
 const AppDrawer = ({ updateAuthState, getUser }) => {
-  useEffect(() => {
-    Firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        getUser(user.uid);
-        if (user != null) {
-          updateAuthState("loggedIn");
-        }
-      } else {
-        updateAuthState("loggedOut");
-      }
-    });
-  }, []);
-
   return (
     <Drawer.Navigator initialRouteName="Home">
       <Drawer.Screen name="Home">
@@ -36,11 +22,7 @@ const AppDrawer = ({ updateAuthState, getUser }) => {
           <AppNavigator {...screenProps} updateAuthState={updateAuthState} />
         )}
       </Drawer.Screen>
-      <Drawer.Screen name="Main">
-        {(screenProps) => (
-          <HomeScreen {...screenProps} updateAuthState={updateAuthState} />
-        )}
-      </Drawer.Screen>
+
       <Drawer.Screen name="Settings">
         {(screenProps) => (
           <SettingsScreen {...screenProps} updateAuthState={updateAuthState} />
