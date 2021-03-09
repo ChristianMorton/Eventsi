@@ -6,7 +6,11 @@ import {
   UPDATE_PASSWORD,
   UPDATE_NAME,
 } from "../actions/user";
-import { GET_MY_EVENTS, CREATE_EVENT } from "../actions/events";
+import {
+  GET_MY_EVENTS,
+  CREATE_EVENT,
+  GET_EVENT_MEDIA,
+} from "../actions/events";
 
 const user = (state = {}, action) => {
   switch (action.type) {
@@ -31,6 +35,8 @@ const events = (state = {}, action) => {
       return { ...state, event: action.payload };
     case CREATE_EVENT:
       return { ...state, createdEvent: action.payload };
+    case GET_EVENT_MEDIA:
+      return { ...state, currentEventMedia: action.payload };
     default:
       return state;
   }

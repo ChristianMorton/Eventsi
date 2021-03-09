@@ -16,19 +16,6 @@ import { EventsNavigator } from "../navigation/EventsNavigator";
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = ({ updateAuthState, getUser }) => {
-  useEffect(() => {
-    Firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        getUser(user.uid);
-        if (user != null) {
-          updateAuthState("loggedIn");
-        }
-      } else {
-        updateAuthState("loggedOut");
-      }
-    });
-  }, []);
-
   return (
     <Tab.Navigator>
       <Tab.Screen name="Home">
