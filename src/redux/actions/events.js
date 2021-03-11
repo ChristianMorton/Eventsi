@@ -1,4 +1,5 @@
 import Firebase, { db } from "../../config/Firebase";
+import "firebase/storage";
 
 //constants
 export const GET_MY_EVENTS = "GET_MY_EVENTS";
@@ -55,6 +56,8 @@ export const createEvent = (eventData) => {
 };
 
 export const getEventMedia = (idOfEvent) => {
+  const storage = Firebase.storage();
+
   return async (dispatch, getState) => {
     try {
       const uid = Firebase.auth().currentUser.uid;
@@ -67,14 +70,22 @@ export const getEventMedia = (idOfEvent) => {
 
         if (res) {
           const eventInfo = [];
-          res.forEach((doc) =>
-            eventInfo.push({
-              id: doc.id,
-              //ref: doc.ref,
-              slug: doc.data().slug,
-              name: doc.data().name,
-            })
-          );
+          res.forEach((doc) => {
+            const storageVar = storage.ref(doc.data().slug);
+            storageVar
+              .getDownloadURL()
+              .then((url) => {
+                eventInfo.push({
+                  id: doc.id,
+                  url: url,
+                  slug: doc.data().slug,
+                  name: doc.data().name,
+                });
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          });
           dispatch({ type: GET_EVENT_MEDIA, payload: eventInfo });
         }
       }
