@@ -28,11 +28,6 @@ const EventDetailScreen = ({
   events,
 }) => {
   const { id, RSVPTime, name, description, time, dressCode } = route.params;
-  const [image, setImage] = useState(null);
-  const [uploading, setUploading] = useState(false);
-  const [eventMedia, setEventMedia] = useState([]);
-  const [refreshing, setRefreshing] = useState(false);
-  const [eventMediaURI, setEventMediaURI] = useState([]);
 
   const chooseImage = async () => {
     let result = await ImagePicker.launchCameraAsync();
@@ -91,7 +86,14 @@ const EventDetailScreen = ({
       </View>
       <AppButton title="upload images" onPress={chooseImage} />
       <View style={{ flex: 1 }}>
-        <EventsTabs id={id} />
+        <EventsTabs
+          id={id}
+          RSVPTime={RSVPTime}
+          name={name}
+          description={description}
+          time={time}
+          dressCode={dressCode}
+        />
       </View>
     </SafeAreaView>
   );
