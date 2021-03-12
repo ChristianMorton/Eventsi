@@ -7,7 +7,16 @@ import PostsTab from "../components/PostsTab";
 
 const Tab = createMaterialTopTabNavigator();
 
-const EventsTabs = ({ id, RSVPTime, name, description, time, dressCode }) => {
+const EventsTabs = ({
+  id,
+  RSVPTime,
+  name,
+  description,
+  time,
+  dressCode,
+  Location,
+  hasRSVP,
+}) => {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Gallery">
@@ -26,6 +35,8 @@ const EventsTabs = ({ id, RSVPTime, name, description, time, dressCode }) => {
             description={description}
             time={time}
             dressCode={dressCode}
+            Location={Location}
+            hasRSVP={hasRSVP}
           />
         )}
       </Tab.Screen>

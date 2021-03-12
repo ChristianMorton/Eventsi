@@ -21,6 +21,8 @@ const EventListPanel = ({ name, description, time, eventInfo }) => {
           dressCode: eventInfo.dressCode,
           RSVPTime: eventInfo.replyByTime.toDate(),
           id: eventInfo.id,
+          Location: eventInfo.Location,
+          hasRSVP: eventInfo.hasRSVP,
         });
       }}
     >

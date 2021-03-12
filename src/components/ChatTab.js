@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat";
-import Firebase, { db } from "../config/Firebase";
+import { db } from "../config/Firebase";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import * as firebase from "firebase";
 
 const ChatTab = ({ id, currentuser }) => {

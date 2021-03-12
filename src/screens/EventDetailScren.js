@@ -27,7 +27,16 @@ const EventDetailScreen = ({
   getEventMedia,
   events,
 }) => {
-  const { id, RSVPTime, name, description, time, dressCode } = route.params;
+  const {
+    id,
+    RSVPTime,
+    name,
+    description,
+    time,
+    dressCode,
+    Location,
+    hasRSVP,
+  } = route.params;
 
   const chooseImage = async () => {
     let result = await ImagePicker.launchCameraAsync();
@@ -43,7 +52,10 @@ const EventDetailScreen = ({
       const response = await fetch(uri);
       const blob = await response.blob();
       const uuid = uuidv4() + ".jpg";
-      var ref = firebase.storage().ref().child(uuid);
+      var ref = firebase
+        .storage()
+        .ref()
+        .child("events/" + id + "/media/" + uuid);
       const res = await db
         .collection("events")
         .doc(id)
@@ -93,6 +105,8 @@ const EventDetailScreen = ({
           description={description}
           time={time}
           dressCode={dressCode}
+          Location={Location}
+          hasRSVP={hasRSVP}
         />
       </View>
     </SafeAreaView>

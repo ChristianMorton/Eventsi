@@ -26,8 +26,6 @@ const InitialScreen = ({ navigation, user, getMyEvents, events }) => {
     <SafeAreaView style={styles.safeAreaContainer}>
       <View style={styles.container}>
         <Text style={styles.title}>Welcome! What would you like to do?</Text>
-        <Text>{user.email}</Text>
-        <Text>{events.event ? events.event[0].description : null}</Text>
         <AppButton title="Host Event" onPress={hostEvent} />
         <AppButton title="Join Event" onPress={joinEvent} />
       </View>

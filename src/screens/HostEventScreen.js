@@ -7,6 +7,7 @@ import {
   ScrollView,
   Switch,
   View,
+  Dimensions,
 } from "react-native";
 import DateTimeInput from "../components/DateTimeInput";
 import AppTextInput from "../components/AppTextInput";
@@ -16,6 +17,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import "firebase/firestore";
 import * as firebase from "firebase";
+import MapView from "react-native-maps";
+import MapComponent from "../components/MapComponent";
 const HostEventScreen = ({ navigation, createEvent }) => {
   const [nameOfEvent, setNameOfEvent] = useState("");
   const [descriptionOfEvent, setDescriptionOfEvent] = useState("");
@@ -24,6 +27,8 @@ const HostEventScreen = ({ navigation, createEvent }) => {
   const [date, setDate] = useState(new Date(Date.now()));
   const [replyDate, setReplyDate] = useState(new Date(Date.now()));
   const [isReplyByDateEnabled, setIsReplyByDateEnabled] = useState(false);
+  const [longitudeLatitude, setLongitudeLatitude] = useState(null);
+
   const toggleRSVPSwitch = () =>
     setIsReplyByDateEnabled((previousState) => !previousState);
   const toggleDressCodeSwitch = () =>
@@ -38,6 +43,10 @@ const HostEventScreen = ({ navigation, createEvent }) => {
       name: nameOfEvent,
       replyByTime: firebase.firestore.Timestamp.fromDate(replyDate),
       time: firebase.firestore.Timestamp.fromDate(date),
+      Location: new firebase.firestore.GeoPoint(
+        longitudeLatitude.coords.latitude,
+        longitudeLatitude.coords.longitude
+      ),
     });
   };
 
@@ -103,8 +112,17 @@ const HostEventScreen = ({ navigation, createEvent }) => {
             isDateOfEvent={false}
           />
         ) : null}
+        <MapComponent
+          longitudeLatitude={longitudeLatitude}
+          setLongitudeLatitude={setLongitudeLatitude}
+          style={{
+            map: {
+              width: Dimensions.get("window").width,
+              height: Dimensions.get("window").width,
+            },
+          }}
+        />
         <AppButton title="Create event" onPress={createEventButton} />
-
         <StatusBar style="auto" />
       </ScrollView>
     </SafeAreaView>

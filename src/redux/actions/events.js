@@ -71,7 +71,9 @@ export const getEventMedia = (idOfEvent) => {
         if (res) {
           const eventInfo = [];
           res.forEach((doc) => {
-            const storageVar = storage.ref(doc.data().slug);
+            const storageVar = storage.ref(
+              "events/" + idOfEvent + "/media/" + doc.data().slug
+            );
             storageVar
               .getDownloadURL()
               .then((url) => {
