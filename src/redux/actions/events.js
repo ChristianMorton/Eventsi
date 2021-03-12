@@ -46,7 +46,11 @@ export const createEvent = (eventData) => {
       if (currentuser) {
         const res = await db
           .collection("events")
-          .add({ ...eventData, owners: [currentuser.uid] });
+          .add({
+            ...eventData,
+            owners: [currentuser.uid],
+            invited: [currentuser.uid],
+          });
         dispatch({ type: CREATE_EVENT, payload: res.id });
       }
     } catch (e) {
