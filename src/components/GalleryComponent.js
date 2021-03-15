@@ -58,7 +58,6 @@ const GalleryComponent = ({ id, getEventMedia, events }) => {
 
   useEffect(() => {
     getEventMedia(id);
-    wait(2000);
     onRefresh();
   }, []);
 
@@ -69,7 +68,6 @@ const GalleryComponent = ({ id, getEventMedia, events }) => {
         data={events}
         renderItem={renderItem}
         keyExtractor={(item, index) => "key" + index}
-        extraData={events.currentEventMedia}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }

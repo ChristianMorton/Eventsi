@@ -12,18 +12,42 @@ import HomeScreen from "../screens/HomeScreen";
 import AppDrawer from "../navigation/AppDrawer";
 import Firebase from "../config/Firebase";
 import { EventsNavigator } from "../navigation/EventsNavigator";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = ({ updateAuthState, getUser }) => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home">
+    <Tab.Navigator
+      tabBarOptions={{
+        activeBackgroundColor: "#72efdd",
+        inactiveBackgroundColor: "#6930c3",
+        activeTintColor: "#000",
+        inactiveTintColor: "#fff",
+      }}
+    >
+      <Tab.Screen
+        options={{
+          tabBarLabel: "Home",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}
+        name="Home"
+      >
         {(screenProps) => (
           <AppDrawer {...screenProps} updateAuthState={updateAuthState} />
         )}
       </Tab.Screen>
-      <Tab.Screen name="Show Events">
+      <Tab.Screen
+        options={{
+          tabBarLabel: "Events",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="calendar" color={color} size={size} />
+          ),
+        }}
+        name="Show Events"
+      >
         {(screenProps) => (
           <EventsNavigator {...screenProps} updateAuthState={updateAuthState} />
         )}
