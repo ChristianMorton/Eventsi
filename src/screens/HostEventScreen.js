@@ -8,6 +8,7 @@ import {
   Switch,
   View,
   Dimensions,
+  CheckBox
 } from "react-native";
 import DateTimeInput from "../components/DateTimeInput";
 import AppTextInput from "../components/AppTextInput";

@@ -6,6 +6,7 @@ import {
   StyleSheet,
   StatusBar,
   Dimensions,
+  Button,
 } from "react-native";
 import AppButton from "../components/AppButton";
 import * as ImagePicker from "expo-image-picker";
@@ -19,6 +20,8 @@ import { bindActionCreators } from "redux";
 import { getEventMedia } from "../redux/actions/events";
 import GalleryComponent from "../components/GalleryComponent";
 import EventsTabs from "../navigation/EventsTabs";
+import Clipboard from "expo-clipboard";
+import ImageButton from "../components/ImageButton";
 
 const EventDetailScreen = ({
   route,
@@ -45,6 +48,9 @@ const EventDetailScreen = ({
     if (!result.cancelled) {
       await uploadImage(result.uri);
     }
+  };
+  const copyToClipboard = () => {
+    Clipboard.setString(id);
   };
 
   const uploadImage = async (uri) => {
@@ -93,10 +99,12 @@ const EventDetailScreen = ({
           Date: {time.getDate()}/{time.getMonth() + 1}/
           {time.getYear() < 2000 ? time.getYear() + 1900 : time.getYear()}
         </Text>
-        <Text style={styles.description}>{description}</Text>
-        <Text>Dress code: {dressCode}</Text>
+        <View style={styles.id}>
+          <Text style={{ alignSelf: "center" }}>Invite ID: {id}</Text>
+          <Button title="Copy" onPress={copyToClipboard} />
+        </View>
       </View>
-      <AppButton title="upload images" onPress={chooseImage} />
+
       <View style={{ flex: 1 }}>
         <EventsTabs
           id={id}
@@ -109,6 +117,7 @@ const EventDetailScreen = ({
           hasRSVP={hasRSVP}
         />
       </View>
+      <ImageButton style={styles.button} onPress={chooseImage} icon="camera" />
     </SafeAreaView>
   );
 };
@@ -136,6 +145,16 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     maxWidth: Dimensions.get("window").width,
+  },
+  id: {
+    flexDirection: "row",
+    textAlignVertical: "center",
+    justifyContent: "space-between",
+  },
+  button: {
+    position: "absolute",
+    right: 5,
+    bottom: 5,
   },
 });
 

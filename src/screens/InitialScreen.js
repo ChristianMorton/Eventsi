@@ -20,6 +20,7 @@ const InitialScreen = ({ navigation, user, getMyEvents, events }) => {
 
   const joinEvent = () => {
     console.log("Join Event");
+    navigation.navigate("JoinEventScreen");
   };
 
   return (

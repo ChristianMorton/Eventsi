@@ -26,7 +26,7 @@ const HomeScreen = ({ updateAuthState, events }) => {
     setRefreshing(true);
     getMyEvents();
     wait(2000).then(() => setRefreshing(false));
-  }, []);
+  }, [refreshing]);
 
   const renderItem = ({ item }) => (
     <EventListPanel

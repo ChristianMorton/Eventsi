@@ -19,11 +19,10 @@ const styles = StyleSheet.create({
     width: "80%",
     backgroundColor: "tomato",
   },
-  buttonnText: {
-    color: "white",
-    fontSize: 18,
+  buttonText: {
+    color: "black",
+    fontSize: 16,
     fontWeight: "600",
-    textTransform: "uppercase",
   },
 });
 

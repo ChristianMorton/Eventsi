@@ -3,6 +3,7 @@ import HomeScreen from "../screens/HomeScreen";
 import HostEventScreen from "../screens/HostEventScreen";
 import InitialScreen from "../screens/InitialScreen";
 import { createStackNavigator } from "@react-navigation/stack";
+import JoinEventScreen from "../screens/JoinEventScreen";
 
 const AppStack = createStackNavigator();
 
@@ -20,6 +21,14 @@ export const AppNavigator = (props) => {
       <AppStack.Screen name="HostEventScreen">
         {(screenProps) => (
           <HostEventScreen
+            {...screenProps}
+            updateAuthState={props.updateAuthState}
+          />
+        )}
+      </AppStack.Screen>
+      <AppStack.Screen name="JoinEventScreen">
+        {(screenProps) => (
+          <JoinEventScreen
             {...screenProps}
             updateAuthState={props.updateAuthState}
           />

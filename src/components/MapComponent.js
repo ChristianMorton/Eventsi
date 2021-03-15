@@ -40,7 +40,7 @@ const MapComponent = ({
         return;
       }
       if (preGeopoint == null) {
-        let location = await Location.getCurrentPositionAsync({});
+        let location = await Location.getCurrentPositionAsync({accuracy:Location.Accuracy.High});
         setLongitudeLatitude(location);
       }
     })();

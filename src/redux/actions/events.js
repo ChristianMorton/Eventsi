@@ -16,7 +16,7 @@ export const getMyEvents = () => {
       if (currentuser) {
         const res = await db
           .collection("events")
-          .where("owners", "array-contains", currentuser.uid)
+          .where("invited."+ currentuser.uid + ".status", "in", ["invited", "going", "maybe"])
           .get();
 
         if (res) {
@@ -44,12 +44,14 @@ export const createEvent = (eventData) => {
     try {
       const currentuser = Firebase.auth().currentUser;
       if (currentuser) {
+        const testuid = `${currentuser.uid}`;
+        const invitedVariable = {[testuid]:{status:"going", name:getState().user.name}}
         const res = await db
           .collection("events")
           .add({
             ...eventData,
-            owners: [currentuser.uid],
-            invited: [currentuser.uid],
+            owners: [testuid],
+            invited: invitedVariable
           });
         dispatch({ type: CREATE_EVENT, payload: res.id });
       }
@@ -95,6 +97,29 @@ export const getEventMedia = (idOfEvent) => {
           dispatch({ type: GET_EVENT_MEDIA, payload: eventInfo });
         }
       }
+    } catch (e) {
+      alert(e);
+      console.log(e);
+    }
+  };
+};
+
+export const joinEvent = (idOfEvent) => {
+  const storage = Firebase.storage();
+
+  return async (dispatch, getState) => {
+    try {
+      const uid = Firebase.auth().currentUser.uid;
+      if (uid) {
+        const testuid = `${uid}`;
+        const invitedVariable = {[testuid]:{status:"invited", name:getState().user.name}}
+        const res = await db
+          .collection("events")
+          .doc(idOfEvent)
+          .set({invited:invitedVariable}, { merge: true });
+
+          dispatch(getMyEvents());
+        }
     } catch (e) {
       alert(e);
       console.log(e);

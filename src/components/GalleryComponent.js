@@ -17,7 +17,7 @@ import { getEventMedia } from "../redux/actions/events";
 import { useSelector } from "react-redux";
 
 const GalleryComponent = ({ id, getEventMedia, events }) => {
-  const [eventMedia, setEventMedia] = useState([]);
+  const [eventMedia, setEventMedia] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
@@ -58,6 +58,8 @@ const GalleryComponent = ({ id, getEventMedia, events }) => {
 
   useEffect(() => {
     getEventMedia(id);
+    wait(2000);
+    onRefresh();
   }, []);
 
   return (
@@ -67,6 +69,7 @@ const GalleryComponent = ({ id, getEventMedia, events }) => {
         data={events}
         renderItem={renderItem}
         keyExtractor={(item, index) => "key" + index}
+        extraData={events.currentEventMedia}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
