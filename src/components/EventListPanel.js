@@ -10,6 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const EventListPanel = ({ name, description, time, eventInfo }) => {
   const navigation = useNavigation();
+
   return (
     <TouchableOpacity
       onPress={() => {
@@ -22,7 +23,7 @@ const EventListPanel = ({ name, description, time, eventInfo }) => {
           RSVPTime: eventInfo.replyByTime.toDate(),
           id: eventInfo.id,
           Location: eventInfo.Location,
-          hasRSVP: eventInfo.hasRSVP,
+          hasRSVP: eventInfo.hasRsvp,
         });
       }}
     >
