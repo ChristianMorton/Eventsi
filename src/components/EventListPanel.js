@@ -24,6 +24,7 @@ const EventListPanel = ({ name, description, time, eventInfo }) => {
           id: eventInfo.id,
           Location: eventInfo.Location,
           hasRSVP: eventInfo.hasRsvp,
+          invited: eventInfo.invited,
         });
       }}
     >

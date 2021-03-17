@@ -22,6 +22,7 @@ import GalleryComponent from "../components/GalleryComponent";
 import EventsTabs from "../navigation/EventsTabs";
 import Clipboard from "expo-clipboard";
 import ImageButton from "../components/ImageButton";
+import ChangeInvitedStatus from "../components/ChangeInvitedStatus";
 
 const EventDetailScreen = ({
   route,
@@ -39,6 +40,7 @@ const EventDetailScreen = ({
     dressCode,
     Location,
     hasRSVP,
+    invited,
   } = route.params;
 
   const chooseImage = async () => {
@@ -91,14 +93,22 @@ const EventDetailScreen = ({
     })();
   }, []);
 
+  const uid = firebase.auth().currentUser.uid;
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.item}>
         <Text style={styles.title}>{name}</Text>
-        <Text style={styles.time}>
-          Date: {time.getDate()}/{time.getMonth() + 1}/
-          {time.getYear() < 2000 ? time.getYear() + 1900 : time.getYear()}
-        </Text>
+        <View style={styles.id}>
+          <Text style={styles.time}>
+            Date: {time.getDate()}/{time.getMonth() + 1}/
+            {time.getYear() < 2000 ? time.getYear() + 1900 : time.getYear()}
+          </Text>
+          <ChangeInvitedStatus
+            currentStatus={invited[uid].status}
+            idOfEvent={id}
+          />
+        </View>
         <View style={styles.id}>
           <Text style={{ alignSelf: "center" }}>Invite ID: {id}</Text>
           <Button title="Copy" onPress={copyToClipboard} />

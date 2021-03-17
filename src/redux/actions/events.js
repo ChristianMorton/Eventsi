@@ -16,7 +16,11 @@ export const getMyEvents = () => {
       if (currentuser) {
         const res = await db
           .collection("events")
-          .where("invited."+ currentuser.uid + ".status", "in", ["invited", "going", "maybe"])
+          .where("invited." + currentuser.uid + ".status", "in", [
+            "invited",
+            "going",
+            "maybe",
+          ])
           .get();
 
         if (res) {
@@ -45,14 +49,14 @@ export const createEvent = (eventData) => {
       const currentuser = Firebase.auth().currentUser;
       if (currentuser) {
         const testuid = `${currentuser.uid}`;
-        const invitedVariable = {[testuid]:{status:"going", name:getState().user.name}}
-        const res = await db
-          .collection("events")
-          .add({
-            ...eventData,
-            owners: [testuid],
-            invited: invitedVariable
-          });
+        const invitedVariable = {
+          [testuid]: { status: "going", name: getState().user.name },
+        };
+        const res = await db.collection("events").add({
+          ...eventData,
+          owners: [testuid],
+          invited: invitedVariable,
+        });
         dispatch({ type: CREATE_EVENT, payload: res.id });
       }
     } catch (e) {
@@ -112,14 +116,41 @@ export const joinEvent = (idOfEvent) => {
       const uid = Firebase.auth().currentUser.uid;
       if (uid) {
         const testuid = `${uid}`;
-        const invitedVariable = {[testuid]:{status:"invited", name:getState().user.name}}
+        const invitedVariable = {
+          [testuid]: { status: "invited", name: getState().user.name },
+        };
         const res = await db
           .collection("events")
           .doc(idOfEvent)
-          .set({invited:invitedVariable}, { merge: true });
+          .set({ invited: invitedVariable }, { merge: true });
 
-          dispatch(getMyEvents());
-        }
+        dispatch(getMyEvents());
+      }
+    } catch (e) {
+      alert(e);
+      console.log(e);
+    }
+  };
+};
+
+export const changeStatus = (idOfEvent, status) => {
+  const storage = Firebase.storage();
+
+  return async (dispatch, getState) => {
+    try {
+      const uid = Firebase.auth().currentUser.uid;
+      if (uid) {
+        const testuid = `${uid}`;
+        const invitedVariable = {
+          [testuid]: { status: status, name: getState().user.name },
+        };
+        const res = await db
+          .collection("events")
+          .doc(idOfEvent)
+          .set({ invited: invitedVariable }, { merge: true });
+
+        dispatch(getMyEvents());
+      }
     } catch (e) {
       alert(e);
       console.log(e);
