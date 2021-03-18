@@ -50,7 +50,6 @@ const MapComponent = ({
         setLongitudeLatitude(location);
       }
     })();
-    navigation.navigate("InitialLogin");
   }, []);
 
   useEffect(() => {
