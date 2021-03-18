@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import DetailsText from "./DetailsText";
 import MapComponent from "./MapComponent";
+import RSVPStatusPanel from "./RSVPStatusPanel";
 
 const DetailsTab = ({
   id,
@@ -37,6 +38,7 @@ const DetailsTab = ({
           text={"RSVP by: " + RSVPTime.toString()}
         />
       ) : null}
+      <RSVPStatusPanel eventId={id} />
       <Modal animationType="slide" transparent={true} visible={modalVisible}>
         <View>
           <MapComponent
