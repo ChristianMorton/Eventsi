@@ -9,12 +9,14 @@ const MapComponent = ({
   longitudeLatitude,
   setLongitudeLatitude,
   preGeopoint = null,
+  navigation,
 }) => {
   const [searchLocation, setSearchLocation] = useState("");
   const [postalAddress, setPostalAddress] = useState("");
   const [arrayOfPossibleLocations, setArrayOfPossibleLocations] = useState(
     null
   ); // Here because we might use in future tbh
+
   const [searched, setSearched] = useState(false);
   const searchForLocation = async () => {
     Location.geocodeAsync(searchLocation).then((res) => {
@@ -37,13 +39,18 @@ const MapComponent = ({
       let { status } = await Location.requestPermissionsAsync();
       if (status !== "granted") {
         setErrorMsg("Permission to access location was denied");
+        alert("You must enable location");
+        navigation.navigate("InitialLogin");
         return;
       }
       if (preGeopoint == null) {
-        let location = await Location.getCurrentPositionAsync({accuracy:Location.Accuracy.High});
+        let location = await Location.getCurrentPositionAsync({
+          accuracy: Location.Accuracy.High,
+        });
         setLongitudeLatitude(location);
       }
     })();
+    navigation.navigate("InitialLogin");
   }, []);
 
   useEffect(() => {

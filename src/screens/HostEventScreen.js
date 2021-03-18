@@ -8,7 +8,7 @@ import {
   Switch,
   View,
   Dimensions,
-  CheckBox
+  CheckBox,
 } from "react-native";
 import DateTimeInput from "../components/DateTimeInput";
 import AppTextInput from "../components/AppTextInput";
@@ -122,6 +122,7 @@ const HostEventScreen = ({ navigation, createEvent }) => {
               height: Dimensions.get("window").width,
             },
           }}
+          navigation={navigation}
         />
         <AppButton title="Create event" onPress={createEventButton} />
         <StatusBar style="auto" />

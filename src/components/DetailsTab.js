@@ -20,6 +20,7 @@ const DetailsTab = ({
   dressCode,
   Location,
   hasRSVP,
+  navigation,
 }) => {
   const [longitudeLatitude, setLongitudeLatitude] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
@@ -50,6 +51,7 @@ const DetailsTab = ({
                 height: Dimensions.get("window").height - 70,
               },
             }}
+            navigation={navigation}
             preGeopoint={Location}
           />
           <TouchableHighlight
