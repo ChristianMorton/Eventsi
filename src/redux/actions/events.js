@@ -5,6 +5,7 @@ import "firebase/storage";
 export const GET_MY_EVENTS = "GET_MY_EVENTS";
 export const CREATE_EVENT = "CREATE_EVENT";
 export const GET_EVENT_MEDIA = "GET_EVENT_MEDIA";
+export const GET_EVENT_POSTS = "GET_EVENT_POSTS";
 
 // actions
 
@@ -61,6 +62,39 @@ export const createEvent = (eventData) => {
       }
     } catch (e) {
       alert(e);
+    }
+  };
+};
+
+export const getEventPosts = (idOfEvent) => {
+  const storage = Firebase.storage();
+
+  return async (dispatch, getState) => {
+    try {
+      const uid = Firebase.auth().currentUser.uid;
+      if (uid) {
+        const res = await db
+          .collection("events")
+          .doc(idOfEvent)
+          .collection("posts")
+          .get();
+        if (res) {
+          const eventInfo = [];
+          res.forEach((doc) => {
+            eventInfo.push({
+              id: doc.id,
+              text: doc.data().text,
+              name: doc.data().name,
+            });
+          });
+          console.log(eventInfo);
+
+          dispatch({ type: GET_EVENT_POSTS, payload: eventInfo });
+        }
+      }
+    } catch (e) {
+      alert(e);
+      console.log(e);
     }
   };
 };

@@ -10,6 +10,7 @@ import {
   GET_MY_EVENTS,
   CREATE_EVENT,
   GET_EVENT_MEDIA,
+  GET_EVENT_POSTS,
 } from "../actions/events";
 
 const user = (state = {}, action) => {
@@ -37,6 +38,8 @@ const events = (state = {}, action) => {
       return { ...state, createdEvent: action.payload };
     case GET_EVENT_MEDIA:
       return { ...state, currentEventMedia: action.payload };
+    case GET_EVENT_POSTS:
+      return { ...state, currentEventPosts: action.payload };
     default:
       return state;
   }
