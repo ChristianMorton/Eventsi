@@ -6,8 +6,10 @@ import {
   Dimensions,
   Modal,
   TouchableHighlight,
+  ScrollView
 } from "react-native";
 import DetailsText from "./DetailsText";
+import DressCodeModal from "./DressCodeModal";
 import MapComponent from "./MapComponent";
 import RSVPStatusPanel from "./RSVPStatusPanel";
 
@@ -23,16 +25,19 @@ const DetailsTab = ({
   navigation,
 }) => {
   const [longitudeLatitude, setLongitudeLatitude] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [mapModalVisible, setMapModalVisible] = useState(false);
+    const [dressCodeModalVisible, setDressCodeModalVisible] = useState(false);
+
 
   return (
     <View>
+      <ScrollView>
       <DetailsText
         icon="information"
         text={"Time of event: " + time.toString()}
       />
       <DetailsText icon="information" text={"Description: " + description} />
-      {dressCode != "" ? <DetailsText icon="hanger" text={dressCode} /> : null}
+      {dressCode != "" ? (<TouchableHighlight onPress={()=>setDressCodeModalVisible(!dressCodeModalVisible)}><DetailsText icon="hanger" text={dressCode} /></TouchableHighlight>) : null}
       {hasRSVP ? (
         <DetailsText
           icon="clock-time-four"
@@ -40,8 +45,8 @@ const DetailsTab = ({
         />
       ) : null}
       <RSVPStatusPanel eventId={id} />
-      <Modal animationType="slide" transparent={true} visible={modalVisible}>
-        <View>
+      <Modal animationType="slide" transparent={false} visible={mapModalVisible}>
+        <View style={{backgroundColor:"#fff "}}>
           <MapComponent
             longitudeLatitude={longitudeLatitude}
             setLongitudeLatitude={setLongitudeLatitude}
@@ -57,21 +62,35 @@ const DetailsTab = ({
           <TouchableHighlight
             style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
             onPress={() => {
-              setModalVisible(!modalVisible);
+              setMapModalVisible(!mapModalVisible);
             }}
           >
             <Text style={styles.textStyle}>Hide Map</Text>
           </TouchableHighlight>
         </View>
       </Modal>
+      <Modal animationType="slide" transparent={false} visible={dressCodeModalVisible}>
+        <View style={{flex:1}}>
+        <DressCodeModal/>
+        <TouchableHighlight
+        style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+        onPress={() => {
+          setDressCodeModalVisible(!dressCodeModalVisible);
+        }}
+      >
+        <Text>Close Dress Code</Text>
+      </TouchableHighlight>
+        </View>
+      </Modal>
       <TouchableHighlight
         style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
         onPress={() => {
-          setModalVisible(!modalVisible);
+          setMapModalVisible(!mapModalVisible);
         }}
       >
         <Text style={styles.textStyle}>Show Map</Text>
       </TouchableHighlight>
+      </ScrollView>
     </View>
   );
 };
@@ -100,7 +119,7 @@ const styles = StyleSheet.create({
   },
   openButton: {
     backgroundColor: "#F194FF",
-    borderRadius: 20,
+    borderRadius: 0,
     padding: 10,
     elevation: 2,
   },

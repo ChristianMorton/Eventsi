@@ -75,7 +75,7 @@ const MapComponent = ({
     searchGeopoint();
   }, []);
   return (
-    <View>
+    <View style={{backgroundColor:"#fff"}}>
       {preGeopoint == null ? (
         <View style={styles.searchBarContainer}>
           <View style={{ flex: 9 }}>
