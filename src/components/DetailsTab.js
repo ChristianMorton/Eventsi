@@ -71,7 +71,7 @@ const DetailsTab = ({
       </Modal>
       <Modal animationType="slide" transparent={false} visible={dressCodeModalVisible}>
         <View style={{flex:1}}>
-        <DressCodeModal/>
+        <DressCodeModal id={id} dressCode={dressCode}/>
         <TouchableHighlight
         style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
         onPress={() => {
