@@ -16,15 +16,10 @@ const EventsTabs = ({
   dressCode,
   Location,
   hasRSVP,
+  chooseImage,
 }) => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Gallery">
-        {(screenProps) => <GalleryComponent {...screenProps} id={id} />}
-      </Tab.Screen>
-      <Tab.Screen name="Posts">
-        {(screenProps) => <PostsTab {...screenProps} id={id} />}
-      </Tab.Screen>
       <Tab.Screen name="Details">
         {(screenProps) => (
           <DetailsTab
@@ -40,6 +35,19 @@ const EventsTabs = ({
           />
         )}
       </Tab.Screen>
+      <Tab.Screen name="Posts">
+        {(screenProps) => <PostsTab {...screenProps} id={id} />}
+      </Tab.Screen>
+      <Tab.Screen name="Gallery">
+        {(screenProps) => (
+          <GalleryComponent
+            {...screenProps}
+            chooseImage={chooseImage}
+            id={id}
+          />
+        )}
+      </Tab.Screen>
+
       <Tab.Screen name="Chat">
         {(screenProps) => <ChatTab {...screenProps} id={id} />}
       </Tab.Screen>

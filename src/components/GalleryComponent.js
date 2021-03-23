@@ -14,9 +14,10 @@ import * as firebase from "firebase";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getEventMedia } from "../redux/actions/events";
-import { useSelector } from "react-redux";
+import ImageButton from "./ImageButton";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-const GalleryComponent = ({ id, getEventMedia, events }) => {
+const GalleryComponent = ({ id, getEventMedia, events, chooseImage }) => {
   const [eventMedia, setEventMedia] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -38,28 +39,21 @@ const GalleryComponent = ({ id, getEventMedia, events }) => {
 
   const renderItem = (item) => {
     return (
-      <View
-        style={{
-          flex: 1,
-          width: Dimensions.get("window").width / 3,
-          height: Dimensions.get("window").width / 3,
-        }}
-      >
+      <TouchableOpacity>
         <Image
           source={{
             uri: item.item.url,
           }}
           style={styles.image}
-          resizeMode="stretch"
+          resizeMode="center"
         />
-      </View>
+      </TouchableOpacity>
     );
   };
 
   useEffect(() => {
     getEventMedia(id);
-    onRefresh();
-  }, []);
+  }, [refreshing]);
 
   return (
     <View style={{ flex: 1 }}>
@@ -67,11 +61,13 @@ const GalleryComponent = ({ id, getEventMedia, events }) => {
         numColumns={3}
         data={events}
         renderItem={renderItem}
-        keyExtractor={(item, index) => "key" + index}
+        keyExtractor={(item, index) => "key" + item}
+        style={styles.flatList}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       />
+      <ImageButton style={styles.button} onPress={chooseImage} icon="camera" />
     </View>
   );
 };
@@ -98,7 +94,18 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    maxWidth: Dimensions.get("window").width,
+    height: Dimensions.get("window").width / 3,
+    width: Dimensions.get("window").width / 3,
+    maxWidth: Dimensions.get("window").width / 3,
+    overflow: "visible",
+  },
+  button: {
+    position: "absolute",
+    right: 5,
+    bottom: 5,
+  },
+  flatList: {
+    backgroundColor: "white",
   },
 });
 

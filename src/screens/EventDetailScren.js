@@ -125,9 +125,9 @@ const EventDetailScreen = ({
           dressCode={dressCode}
           Location={Location}
           hasRSVP={hasRSVP}
+          chooseImage={chooseImage}
         />
       </View>
-      <ImageButton style={styles.button} onPress={chooseImage} icon="camera" />
     </SafeAreaView>
   );
 };
@@ -160,11 +160,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     textAlignVertical: "center",
     justifyContent: "space-between",
-  },
-  button: {
-    position: "absolute",
-    right: 5,
-    bottom: 5,
   },
 });
 

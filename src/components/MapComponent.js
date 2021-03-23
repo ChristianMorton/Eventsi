@@ -64,18 +64,35 @@ const MapComponent = ({
         Location.reverseGeocodeAsync({
           longitude: preGeopoint.longitude,
           latitude: preGeopoint.latitude,
-        }).then((res) => {
-          setPostalAddress(
-            res[0].name + " " + res[0].street + ", " + res[0].postalCode
-          );
-          setSearched(true);
-        });
+        })
+          .then((res) => {
+            var tempPostalAddress = "";
+            if (res[0].name != null) {
+              tempPostalAddress += res[0].name + " ";
+            }
+            if (res[0].district != null) {
+              tempPostalAddress += res[0].district + " ";
+            }
+            if (res[0].street != null) {
+              tempPostalAddress += res[0].street;
+            }
+            if (res[0].region != null) {
+              tempPostalAddress += ", " + res[0].region;
+            }
+            if (res[0].postalCode != null) {
+              tempPostalAddress += ", " + res[0].postalCode + " ";
+            }
+
+            setPostalAddress(tempPostalAddress);
+            setSearched(true);
+          })
+          .catch((err) => alert(err));
       }
     };
     searchGeopoint();
   }, []);
   return (
-    <View style={{backgroundColor:"#fff"}}>
+    <View style={{ backgroundColor: "#fff" }}>
       {preGeopoint == null ? (
         <View style={styles.searchBarContainer}>
           <View style={{ flex: 9 }}>

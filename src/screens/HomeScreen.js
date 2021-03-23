@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import {
   SafeAreaView,
   Text,
@@ -19,13 +19,16 @@ const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
 };
 
-const HomeScreen = ({ updateAuthState, events }) => {
+const HomeScreen = ({ updateAuthState, events, getMyEvents }) => {
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    getMyEvents();
     wait(2000).then(() => setRefreshing(false));
+  }, [refreshing]);
+
+  useEffect(() => {
+    getMyEvents();
   }, [refreshing]);
 
   const renderItem = ({ item }) => (
