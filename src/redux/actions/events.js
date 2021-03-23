@@ -33,7 +33,10 @@ export const getMyEvents = () => {
               ref: doc.ref,
             })
           );
-          dispatch({ type: GET_MY_EVENTS, payload: myEvents });
+          const orderedRes = myEvents.sort(function (a, b) {
+            return a.time.toMillis() - b.time.toMillis();
+          });
+          dispatch({ type: GET_MY_EVENTS, payload: orderedRes });
         }
         return Promise.resolve();
       }

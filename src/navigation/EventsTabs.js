@@ -4,6 +4,8 @@ import ChatTab from "../components/ChatTab";
 import DetailsTab from "../components/DetailsTab";
 import GalleryComponent from "../components/GalleryComponent";
 import PostsTab from "../components/PostsTab";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -19,7 +21,34 @@ const EventsTabs = ({
   chooseImage,
 }) => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      tabBarOptions={{
+        activeTintColor: "black",
+        inactiveTintColor: "gray",
+        showLabel: false,
+        showIcon: true,
+      }}
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === "Details") {
+            iconName = focused ? "information" : "information-outline";
+          } else if (route.name === "Posts") {
+            iconName = focused ? "note-multiple" : "note-multiple-outline";
+          } else if (route.name === "Gallery") {
+            iconName = focused ? "image-multiple" : "image-multiple-outline";
+          } else if (route.name === "Chat") {
+            iconName = focused ? "chat" : "chat-outline";
+          }
+
+          // You can return any component that you like here!
+          return (
+            <MaterialCommunityIcons name={iconName} color={color} size={20} />
+          );
+        },
+      })}
+    >
       <Tab.Screen name="Details">
         {(screenProps) => (
           <DetailsTab

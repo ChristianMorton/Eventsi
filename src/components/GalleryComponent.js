@@ -28,7 +28,7 @@ const GalleryComponent = ({ id, getEventMedia, events, chooseImage }) => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    //getEventMedia(id);
+    getEventMedia(id);
     // setEventMedia(events.currentEventMedia);
     //getURI();
     //getEventMediaFunction();
@@ -39,13 +39,20 @@ const GalleryComponent = ({ id, getEventMedia, events, chooseImage }) => {
 
   const renderItem = (item) => {
     return (
-      <TouchableOpacity>
+      <TouchableOpacity
+        style={{
+          height: Dimensions.get("window").width / 3,
+          maxHeight: Dimensions.get("window").width / 3,
+          width: Dimensions.get("window").width / 3,
+          maxWidth: Dimensions.get("window").width / 3,
+        }}
+      >
         <Image
           source={{
             uri: item.item.url,
           }}
           style={styles.image}
-          resizeMode="center"
+          resizeMode="stretch"
         />
       </TouchableOpacity>
     );
@@ -53,7 +60,8 @@ const GalleryComponent = ({ id, getEventMedia, events, chooseImage }) => {
 
   useEffect(() => {
     getEventMedia(id);
-  }, [refreshing]);
+    onRefresh();
+  }, []);
 
   return (
     <View style={{ flex: 1 }}>
@@ -95,6 +103,7 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     height: Dimensions.get("window").width / 3,
+    maxHeight: Dimensions.get("window").width / 3,
     width: Dimensions.get("window").width / 3,
     maxWidth: Dimensions.get("window").width / 3,
     overflow: "visible",

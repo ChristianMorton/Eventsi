@@ -88,7 +88,14 @@ const ChatTab = ({ id, currentuser }) => {
     };
   };
 
-  return <GiftedChat messages={messages} onSend={sendMessage} user={user()} />;
+  return (
+    <GiftedChat
+      messages={messages}
+      onSend={sendMessage}
+      user={user()}
+      scrollToBottom={true}
+    />
+  );
 };
 
 const styles = StyleSheet.create({});
