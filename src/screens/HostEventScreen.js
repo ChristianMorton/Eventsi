@@ -62,7 +62,6 @@ const HostEventScreen = ({ navigation, createEvent }) => {
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <ScrollView>
-        <Text>EventScreen</Text>
         <AppTextInput
           value={nameOfEvent}
           onChangeText={(text) => setNameOfEvent(text)}
@@ -159,7 +158,7 @@ const HostEventScreen = ({ navigation, createEvent }) => {
 const styles = StyleSheet.create({
   safeAreaContainer: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "#f9e9d2",
   },
   container: {
     flex: 1,

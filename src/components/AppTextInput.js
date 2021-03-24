@@ -24,7 +24,7 @@ const AppTextInput = ({ leftIcon, ...otherProps }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#f9f9f9",
+    backgroundColor: "#f9e9ff",
     borderRadius: 25,
     flexDirection: "row",
     padding: 15,

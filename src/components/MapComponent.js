@@ -92,7 +92,7 @@ const MapComponent = ({
     searchGeopoint();
   }, []);
   return (
-    <View style={{ backgroundColor: "#fff" }}>
+    <View style={{ backgroundColor: "#f9e9d2" }}>
       {preGeopoint == null ? (
         <View style={styles.searchBarContainer}>
           <View style={{ flex: 9 }}>
@@ -106,7 +106,8 @@ const MapComponent = ({
               textContentType="none"
             />
             <Button
-              style={{ flex: 1 }}
+              style={{ flex: 1, color: "#9AB7D2" }}
+              color={"#9AB7D2"}
               title="Search"
               onPress={searchForLocation}
             />

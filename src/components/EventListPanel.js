@@ -46,10 +46,11 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight || 0,
   },
   item: {
-    backgroundColor: "#fefefe",
+    backgroundColor: "#F4D2D3",
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
+    borderRadius: 10,
   },
   title: {
     fontSize: 32,

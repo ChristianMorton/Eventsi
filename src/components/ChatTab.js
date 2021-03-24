@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat";
 import { db } from "../config/Firebase";
 import { connect } from "react-redux";
@@ -94,6 +94,7 @@ const ChatTab = ({ id, currentuser }) => {
       onSend={sendMessage}
       user={user()}
       scrollToBottom={true}
+      style={{ backgroundColor: "#f9e9d2" }}
     />
   );
 };

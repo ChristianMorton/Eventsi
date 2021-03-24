@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   safeAreaContainer: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "#f9e9d2",
     alignItems: "center",
   },
   container: {
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 15,
     width: "80%",
-    backgroundColor: "tomato",
+    backgroundColor: "#9AB7D2",
   },
 });
 

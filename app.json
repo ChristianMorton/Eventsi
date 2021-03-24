@@ -18,7 +18,7 @@
       "versionCode": 1
     },
     "splash":{
-      "image":"./assets/EvensiLogo.png",
+      "image":"./assets/EventsiLogo.png",
       "backgroundColor": "#f9e9d2"
     }
   }

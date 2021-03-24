@@ -20,10 +20,13 @@ const TabNavigator = ({ updateAuthState, getUser }) => {
   return (
     <Tab.Navigator
       tabBarOptions={{
-        activeBackgroundColor: "#72efdd",
-        inactiveBackgroundColor: "#6930c3",
+        activeBackgroundColor: "white",
+        inactiveBackgroundColor: "gray",
         activeTintColor: "#000",
         inactiveTintColor: "#fff",
+      }}
+      screenOptions={{
+        cardStyle: { backgroundColor: "#f9e9d2" },
       }}
     >
       <Tab.Screen

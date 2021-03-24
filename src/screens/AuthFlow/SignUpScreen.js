@@ -76,7 +76,7 @@ const SignUp = ({
 const styles = StyleSheet.create({
   safeAreaContainer: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "#f9e9d2",
   },
   container: {
     flex: 1,

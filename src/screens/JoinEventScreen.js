@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, SafeAreaView } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView, StatusBar } from "react-native";
 import AppButton from "../components/AppButton";
 import AppTextInput from "../components/AppTextInput";
 import { joinEvent } from "../redux/actions/events";
@@ -23,7 +23,7 @@ const JoinEventScreen = ({ navigation, joinEvent, events }) => {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <View>
         <AppTextInput
           value={eventID}
@@ -46,7 +46,13 @@ const JoinEventScreen = ({ navigation, joinEvent, events }) => {
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
+    backgroundColor: "#f9e9d2",
+  },
+});
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ joinEvent }, dispatch);

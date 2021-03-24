@@ -20,7 +20,6 @@ const DetailsText = ({ icon, text, ...otherProps }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#f9f9f9",
     borderRadius: 25,
     flexDirection: "row",
     padding: 15,
