@@ -20,12 +20,15 @@ import "firebase/firestore";
 import * as firebase from "firebase";
 import MapView from "react-native-maps";
 import MapComponent from "../components/MapComponent";
+
 const HostEventScreen = ({ navigation, createEvent }) => {
   const [nameOfEvent, setNameOfEvent] = useState("");
   const [descriptionOfEvent, setDescriptionOfEvent] = useState("");
   const [isDressCodeEnabled, setIsDressCodeEnabled] = useState(false);
   const [dressCode, setDressCode] = useState("");
   const [date, setDate] = useState(new Date(Date.now()));
+  const [isEndDateEnabled, setIsEndDateEnabled] = useState(false);
+  const [endDate, setEndDate] = useState(new Date(Date.now()));
   const [replyDate, setReplyDate] = useState(new Date(Date.now()));
   const [isReplyByDateEnabled, setIsReplyByDateEnabled] = useState(false);
   const [longitudeLatitude, setLongitudeLatitude] = useState(null);
@@ -34,6 +37,8 @@ const HostEventScreen = ({ navigation, createEvent }) => {
     setIsReplyByDateEnabled((previousState) => !previousState);
   const toggleDressCodeSwitch = () =>
     setIsDressCodeEnabled((previousState) => !previousState);
+  const toggleEndDateSwitch = () =>
+    setIsEndDateEnabled((previousState) => !previousState);
 
   const createEventButton = () => {
     createEvent({
@@ -48,7 +53,10 @@ const HostEventScreen = ({ navigation, createEvent }) => {
         longitudeLatitude.coords.latitude,
         longitudeLatitude.coords.longitude
       ),
+      endTime: firebase.firestore.Timestamp.fromDate(endDate),
     });
+    navigation.goBack();
+    navigation.navigate("Show Events");
   };
 
   return (
@@ -96,6 +104,24 @@ const HostEventScreen = ({ navigation, createEvent }) => {
         ) : null}
         <DateTimeInput setDate={setDate} date={date} isDateOfEvent={true} />
         <View style={styles.switchContainer}>
+          <Text style={styles.title}>Set an end date? </Text>
+          <Switch
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={isEndDateEnabled ? "#f5dd4b" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={toggleEndDateSwitch}
+            value={isEndDateEnabled}
+          />
+        </View>
+        {isEndDateEnabled ? (
+          <DateTimeInput
+            setDate={setEndDate}
+            date={endDate}
+            isDateOfEvent={false}
+            isEndDate={true}
+          />
+        ) : null}
+        <View style={styles.switchContainer}>
           <Text style={styles.title}>RSVP? </Text>
           <Switch
             trackColor={{ false: "#767577", true: "#81b0ff" }}
@@ -105,7 +131,6 @@ const HostEventScreen = ({ navigation, createEvent }) => {
             value={isReplyByDateEnabled}
           />
         </View>
-
         {isReplyByDateEnabled ? (
           <DateTimeInput
             setDate={setReplyDate}

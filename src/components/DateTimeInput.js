@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import {
   View,
-  Button,
   Platform,
   Text,
   TouchableOpacity,
   StyleSheet,
+  SafeAreaView,
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-const DateTimeInput = ({ setDate, date, isDateOfEvent }) => {
+const DateTimeInput = ({ setDate, date, isDateOfEvent, isEndDate = false }) => {
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
 
@@ -33,44 +33,57 @@ const DateTimeInput = ({ setDate, date, isDateOfEvent }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View>
-        <TouchableOpacity
-          style={styles.touchableOpacity}
-          onPress={showDatepicker}
-        >
-          <Text style={styles.dateInput}>
-            {isDateOfEvent ? "Date of event" : "Reply by date"}:{"  "}
-            {date.getDate()}/{date.getMonth() + 1}/
-            {date.getYear() < 2000 ? date.getYear() + 1900 : date.getYear()}
-          </Text>
-        </TouchableOpacity>
+    <SafeAreaView style={styles.safeAreaContainer}>
+      <View style={styles.container}>
+        <View>
+          <TouchableOpacity
+            style={styles.touchableOpacity}
+            onPress={showDatepicker}
+          >
+            <Text style={styles.dateInput}>
+              {isDateOfEvent
+                ? "Start date of event"
+                : isEndDate
+                ? "End date"
+                : "Reply by date"}
+              :{"  "}
+              {date.getDate()}/{date.getMonth() + 1}/
+              {date.getYear() < 2000 ? date.getYear() + 1900 : date.getYear()}
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <TouchableOpacity
+            style={styles.touchableOpacity}
+            onPress={showTimepicker}
+          >
+            <Text style={styles.dateInput}>
+              {isDateOfEvent
+                ? "Start time of event"
+                : isEndDate
+                ? "End time"
+                : "Reply by time"}
+              :{"  "}
+              {date.getHours() < 10 ? "0" + date.getHours() : date.getHours()}:
+              {date.getMinutes() < 10
+                ? "0" + date.getMinutes()
+                : date.getMinutes()}
+            </Text>
+          </TouchableOpacity>
+        </View>
+        {show && (
+          <DateTimePicker
+            style={{ flex: 1, alignSelf: "stretch" }}
+            testID="dateTimePicker"
+            value={date}
+            mode={mode}
+            is24Hour={true}
+            display="default"
+            onChange={onChange}
+          />
+        )}
       </View>
-      <View>
-        <TouchableOpacity
-          style={styles.touchableOpacity}
-          onPress={showTimepicker}
-        >
-          <Text style={styles.dateInput}>
-            {isDateOfEvent ? "Time of event" : "Reply by time"}:{"  "}
-            {date.getHours() < 10 ? "0" + date.getHours() : date.getHours()}:
-            {date.getMinutes() < 10
-              ? "0" + date.getMinutes()
-              : date.getMinutes()}
-          </Text>
-        </TouchableOpacity>
-      </View>
-      {show && (
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={date}
-          mode={mode}
-          is24Hour={true}
-          display="default"
-          onChange={onChange}
-        />
-      )}
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -83,6 +96,7 @@ const styles = StyleSheet.create({
   safeAreaContainer: {
     flex: 1,
     backgroundColor: "white",
+    alignItems: "center",
   },
   container: {
     flex: 1,

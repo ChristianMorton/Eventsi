@@ -14,6 +14,7 @@ import EventListPanel from "../components/EventListPanel";
 import { getMyEvents } from "../redux/actions/events";
 import "firebase/firestore";
 import * as firebase from "firebase";
+import { useFocusEffect } from "@react-navigation/native";
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -26,6 +27,12 @@ const HomeScreen = ({ updateAuthState, events, getMyEvents }) => {
     setRefreshing(true);
     wait(2000).then(() => setRefreshing(false));
   }, [refreshing]);
+
+  useFocusEffect(
+    useCallback(() => {
+      getMyEvents();
+    })
+  );
 
   useEffect(() => {
     getMyEvents();
