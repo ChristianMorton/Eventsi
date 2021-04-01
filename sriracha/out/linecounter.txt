@@ -1,0 +1,133 @@
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2021-03-09 12:53:09
+count workspace : h:\Workspace\EventsPro
+total files : 97
+total code lines : 29602
+total comment lines : 234
+total blank lines : 296
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |               |            215|             24|             35|   0.73|
+   |          .json|          26531|              0|              2|     90|
+   |            .js|           1550|             19|            148|    5.2|
+   |        .gradle|            126|            119|             24|   0.43|
+   |             .h|              7|              0|              3|  0.024|
+   |    .properties|             21|              3|              5|  0.071|
+   |           .bat|             44|              0|             10|   0.15|
+   |             .m|             72|              0|             19|   0.24|
+   |    .storyboard|             91|              0|              0|   0.31|
+   |         .plist|             83|              1|              0|   0.28|
+   |       .pbxproj|            444|             25|             12|    1.5|
+   |           .xib|             42|              0|              0|   0.14|
+   |           .bzl|             16|              0|              3|  0.054|
+   |           .pro|              9|              1|              1|  0.030|
+   |           .yml|              7|              9|              0|  0.024|
+   |.xcworkspacedata|              7|              0|              0|  0.024|
+   |      .xcscheme|             88|              0|              0|   0.30|
+   |            .md|              9|              0|              8|  0.030|
+   |           .xml|             59|              8|              2|   0.20|
+   |          .java|            181|             25|             24|   0.61|
+   -------------------------------------------------------------------------
+.buckconfig, code is 4, comment is 1, blank is 2.
+.env, code is 7, comment is 0, blank is 0.
+.expo\packager-info.json, code is 10, comment is 0, blank is 0.
+.expo\README.md, code is 9, comment is 0, blank is 8.
+.expo\settings.json, code is 10, comment is 0, blank is 0.
+.firebaserc, code is 5, comment is 0, blank is 0.
+.gitattributes, code is 1, comment is 0, blank is 0.
+.gitignore, code is 54, comment is 21, blank is 9.
+.graphqlconfig.yml, code is 7, comment is 9, blank is 0.
+__tests__\App.js, code is 7, comment is 1, blank is 2.
+android\app\BUCK, code is 46, comment is 1, blank is 9.
+android\app\build.gradle, code is 91, comment is 114, blank is 17.
+android\app\build_defs.bzl, code is 16, comment is 0, blank is 3.
+android\app\debug.keystore, it is a binary file.
+android\app\proguard-rules.pro, code is 9, comment is 1, blank is 1.
+android\app\src\debug\AndroidManifest.xml, code is 5, comment is 0, blank is 2.
+android\app\src\debug\java\com\eventspro\ReactNativeFlipper.java, code is 59, comment is 8, blank is 2.
+android\app\src\main\AndroidManifest.xml, code is 35, comment is 0, blank is 0.
+android\app\src\main\java\com\eventspro\MainActivity.java, code is 28, comment is 6, blank is 7.
+android\app\src\main\java\com\eventspro\MainApplication.java, code is 94, comment is 11, blank is 15.
+android\app\src\main\res\drawable\splashscreen.xml, code is 4, comment is 3, blank is 0.
+android\app\src\main\res\drawable\splashscreen_image.png, it is a binary file.
+android\app\src\main\res\mipmap-hdpi\ic_launcher.png, it is a binary file.
+android\app\src\main\res\mipmap-hdpi\ic_launcher_round.png, it is a binary file.
+android\app\src\main\res\mipmap-mdpi\ic_launcher.png, it is a binary file.
+android\app\src\main\res\mipmap-mdpi\ic_launcher_round.png, it is a binary file.
+android\app\src\main\res\mipmap-xhdpi\ic_launcher.png, it is a binary file.
+android\app\src\main\res\mipmap-xhdpi\ic_launcher_round.png, it is a binary file.
+android\app\src\main\res\mipmap-xxhdpi\ic_launcher.png, it is a binary file.
+android\app\src\main\res\mipmap-xxhdpi\ic_launcher_round.png, it is a binary file.
+android\app\src\main\res\mipmap-xxxhdpi\ic_launcher.png, it is a binary file.
+android\app\src\main\res\mipmap-xxxhdpi\ic_launcher_round.png, it is a binary file.
+android\app\src\main\res\values\colors.xml, code is 4, comment is 1, blank is 0.
+android\app\src\main\res\values\strings.xml, code is 3, comment is 0, blank is 0.
+android\app\src\main\res\values\styles.xml, code is 8, comment is 4, blank is 0.
+android\build.gradle, code is 29, comment is 5, blank is 4.
+android\gradle.properties, code is 16, comment is 2, blank is 5.
+android\gradle\wrapper\gradle-wrapper.jar, it is a binary file.
+android\gradle\wrapper\gradle-wrapper.properties, code is 5, comment is 1, blank is 0.
+android\gradlew, code is 77, comment is 1, blank is 11.
+android\gradlew.bat, code is 44, comment is 0, blank is 10.
+android\settings.gradle, code is 6, comment is 0, blank is 3.
+App.js, code is 67, comment is 0, blank is 10.
+app.json, code is 11, comment is 0, blank is 1.
+babel.config.js, code is 19, comment is 0, blank is 0.
+firebase.json, code is 6, comment is 0, blank is 1.
+functions\.eslintrc.js, code is 14, comment is 1, blank is 0.
+functions\.gitignore, code is 1, comment is 0, blank is 0.
+functions\index.js, code is 13, comment is 0, blank is 4.
+functions\package-lock.json, code is 2453, comment is 0, blank is 0.
+functions\package.json, code is 26, comment is 0, blank is 0.
+index.js, code is 3, comment is 3, blank is 2.
+ios\EventsPro.xcodeproj\project.pbxproj, code is 444, comment is 25, blank is 12.
+ios\EventsPro.xcodeproj\project.xcworkspace\contents.xcworkspacedata, code is 7, comment is 0, blank is 0.
+ios\EventsPro.xcodeproj\project.xcworkspace\xcshareddata\IDEWorkspaceChecks.plist, code is 8, comment is 0, blank is 0.
+ios\EventsPro.xcodeproj\project.xcworkspace\xcuserdata\brentvatne.xcuserdatad\UserInterfaceState.xcuserstate, it is a binary file.
+ios\EventsPro.xcodeproj\xcshareddata\xcschemes\EventsPro.xcscheme, code is 88, comment is 0, blank is 0.
+ios\EventsPro\AppDelegate.h, code is 7, comment is 0, blank is 3.
+ios\EventsPro\AppDelegate.m, code is 65, comment is 0, blank is 16.
+ios\EventsPro\Base.lproj\LaunchScreen.xib, code is 42, comment is 0, blank is 0.
+ios\EventsPro\Images.xcassets\AppIcon.appiconset\Contents.json, code is 38, comment is 0, blank is 0.
+ios\EventsPro\Images.xcassets\Contents.json, code is 6, comment is 0, blank is 0.
+ios\EventsPro\Images.xcassets\SplashScreen.imageset\Contents.json, code is 21, comment is 0, blank is 0.
+ios\EventsPro\Images.xcassets\SplashScreen.imageset\splashscreen.png, it is a binary file.
+ios\EventsPro\Images.xcassets\SplashScreenBackground.imageset\background.png, it is a binary file.
+ios\EventsPro\Images.xcassets\SplashScreenBackground.imageset\Contents.json, code is 21, comment is 0, blank is 0.
+ios\EventsPro\Info.plist, code is 59, comment is 0, blank is 0.
+ios\EventsPro\main.m, code is 7, comment is 0, blank is 3.
+ios\EventsPro\SplashScreen.storyboard, code is 91, comment is 0, blank is 0.
+ios\EventsPro\Supporting\Expo.plist, code is 16, comment is 1, blank is 0.
+ios\Podfile, code is 20, comment is 0, blank is 4.
+metro.config.js, code is 5, comment is 0, blank is 0.
+package-lock.json, code is 20003, comment is 0, blank is 0.
+package.json, code is 55, comment is 0, blank is 0.
+src\components\AppButton.js, code is 27, comment is 0, blank is 3.
+src\components\AppTextInput.js, code is 40, comment is 0, blank is 3.
+src\components\DateTimeInput.js, code is 94, comment is 1, blank is 8.
+src\components\EventListPanel.js, code is 57, comment is 1, blank is 3.
+src\config\Firebase.js, code is 23, comment is 1, blank is 3.
+src\graphql\schema.json, code is 3871, comment is 0, blank is 0.
+src\navigation\AppDrawer.js, code is 42, comment is 0, blank is 6.
+src\navigation\AppNavigator.js, code is 28, comment is 0, blank is 2.
+src\navigation\AuthenticationStack.js, code is 67, comment is 0, blank is 5.
+src\navigation\EventsNavigator.js, code is 27, comment is 0, blank is 2.
+src\navigation\TabNavigator.js, code is 43, comment is 0, blank is 5.
+src\redux\actions\events.js, code is 75, comment is 3, blank is 8.
+src\redux\actions\user.js, code is 72, comment is 2, blank is 12.
+src\redux\reducers\index.js, code is 46, comment is 0, blank is 4.
+src\screens\AuthFlow\ConfirmSignUp.js, code is 63, comment is 0, blank is 5.
+src\screens\AuthFlow\SignInScreen.js, code is 67, comment is 0, blank is 3.
+src\screens\AuthFlow\SignUpScreen.js, code is 108, comment is 0, blank is 8.
+src\screens\EventDetailScren.js, code is 199, comment is 3, blank is 19.
+src\screens\HomeScreen.js, code is 73, comment is 0, blank is 9.
+src\screens\HostEventScreen.js, code is 137, comment is 3, blank is 8.
+src\screens\InitialScreen.js, code is 68, comment is 0, blank is 8.
+src\screens\JoinEventScreen.js, code is 13, comment is 0, blank is 3.
+src\screens\SettingsScreen.js, code is 53, comment is 0, blank is 3.
+===============================================================================
