@@ -11,6 +11,7 @@ import {
   getUser,
 } from "../redux/actions/user";
 import HomeScreen from "../screens/HomeScreen";
+import StorybookUIRoot from "../../storybook";
 
 const Drawer = createDrawerNavigator();
 
@@ -27,6 +28,9 @@ const AppDrawer = ({ updateAuthState, getUser }) => {
         {(screenProps) => (
           <SettingsScreen {...screenProps} updateAuthState={updateAuthState} />
         )}
+      </Drawer.Screen>
+      <Drawer.Screen name="Storybook">
+        {() => <StorybookUIRoot />}
       </Drawer.Screen>
     </Drawer.Navigator>
   );
