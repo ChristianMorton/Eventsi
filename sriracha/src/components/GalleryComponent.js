@@ -1,7 +1,6 @@
 import React, { useEffect, useCallback, useState } from "react";
 import {
   View,
-  Text,
   StyleSheet,
   FlatList,
   RefreshControl,
@@ -10,7 +9,6 @@ import {
   Image,
 } from "react-native";
 import "firebase/storage";
-import * as firebase from "firebase";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getEventMedia } from "../redux/actions/events";
@@ -18,9 +16,7 @@ import ImageButton from "./ImageButton";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const GalleryComponent = ({ id, getEventMedia, events, chooseImage }) => {
-  const [eventMedia, setEventMedia] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
-  const [loaded, setLoaded] = useState(false);
 
   const wait = (timeout) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -29,13 +25,8 @@ const GalleryComponent = ({ id, getEventMedia, events, chooseImage }) => {
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     getEventMedia(id);
-    // setEventMedia(events.currentEventMedia);
-    //getURI();
-    //getEventMediaFunction();
     wait(2000).then(() => setRefreshing(false));
   }, []);
-
-  const storage = firebase.storage();
 
   const renderItem = (item) => {
     return (

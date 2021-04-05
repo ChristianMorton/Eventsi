@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, ActivityIndicator } from "react-native";
+import { StyleSheet, View, ActivityIndicator } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import Firebase from "./src/config/Firebase";
 import { getUser } from "./src/redux/actions/user";
@@ -7,9 +7,7 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunkMiddleware from "redux-thunk";
 import reducer from "./src/redux/reducers";
-import TabNavigator from "./src/navigation/TabNavigator";
 import AuthenticationNavigator from "./src/navigation/AuthenticationStack";
-import { AppNavigator } from "./src/navigation/AppNavigator";
 import AppDrawer from "./src/navigation/AppDrawer";
 
 const middleware = applyMiddleware(thunkMiddleware);
@@ -42,8 +40,8 @@ const App = () => {
     }
   };
 
-  const updateAuthState = (isUserLoggedIn) => {
-    setUserLoggedIn(isUserLoggedIn);
+  const updateAuthState = (isUserLoggedInVariable) => {
+    setUserLoggedIn(isUserLoggedInVariable);
   };
 
   useEffect(() => {

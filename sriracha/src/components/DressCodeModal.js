@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   Text,
   StyleSheet,
-  View,
   SafeAreaView,
   StatusBar,
   TouchableHighlight,
@@ -14,7 +13,7 @@ import * as WebBrowser from "expo-web-browser";
 const DressCodeModal = ({ events, id, dressCode }) => {
   const [arrayOfLinks, setArrayOfLinks] = useState([]);
   const _handlePressButtonAsync = async (link) => {
-    let result = await WebBrowser.openBrowserAsync(link);
+    await WebBrowser.openBrowserAsync(link);
   };
 
   useEffect(() => {

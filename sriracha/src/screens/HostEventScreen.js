@@ -8,7 +8,6 @@ import {
   Switch,
   View,
   Dimensions,
-  CheckBox,
 } from "react-native";
 import DateTimeInput from "../components/DateTimeInput";
 import AppTextInput from "../components/AppTextInput";
@@ -18,7 +17,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import "firebase/firestore";
 import * as firebase from "firebase";
-import MapView from "react-native-maps";
 import MapComponent from "../components/MapComponent";
 
 const HostEventScreen = ({ navigation, createEvent }) => {

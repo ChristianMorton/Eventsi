@@ -9,7 +9,6 @@ import {
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Firebase from "../config/Firebase";
 import AppButton from "../components/AppButton";
 import { getMyEvents } from "../redux/actions/events";
 import "firebase/functions";

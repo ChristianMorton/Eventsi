@@ -1,7 +1,11 @@
-import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { Auth } from "aws-amplify";
-import { SafeAreaView } from "react-native";
+import React from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  SafeAreaView,
+} from "react-native";
 import AppTextInput from "../../components/AppTextInput";
 import AppButton from "../../components/AppButton";
 

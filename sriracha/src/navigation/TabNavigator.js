@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -8,9 +8,7 @@ import {
   login,
   getUser,
 } from "../redux/actions/user";
-import HomeScreen from "../screens/HomeScreen";
 import AppDrawer from "../navigation/AppDrawer";
-import Firebase from "../config/Firebase";
 import { EventsNavigator } from "../navigation/EventsNavigator";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -14,8 +14,8 @@ import { bindActionCreators } from "redux";
 const ChangeInvitedStatus = ({ currentStatus, idOfEvent, changeStatus }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
-  const status = (status) => {
-    changeStatus(idOfEvent, status);
+  const status = (changedStatus) => {
+    changeStatus(idOfEvent, changedStatus);
   };
 
   return (

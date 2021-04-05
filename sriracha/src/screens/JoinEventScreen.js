@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, SafeAreaView, StatusBar } from "react-native";
+import { View, StyleSheet, SafeAreaView, StatusBar } from "react-native";
 import AppButton from "../components/AppButton";
 import AppTextInput from "../components/AppTextInput";
 import { joinEvent } from "../redux/actions/events";
@@ -17,7 +17,6 @@ const JoinEventScreen = ({ navigation, joinEvent, events }) => {
 
   const joinEventButton = async (id) => {
     joinEvent(id).then(() => {
-      const joinedEvent = events.event.find((element) => element.id == id);
       navigation.navigate("Show Events");
     });
   };

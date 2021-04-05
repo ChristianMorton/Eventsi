@@ -27,8 +27,8 @@ const MapComponent = ({
       Location.reverseGeocodeAsync({
         longitude: res[0].longitude,
         latitude: res[0].latitude,
-      }).then((res) => {
-        setPostalAddress(res.postalCode);
+      }).then((rev) => {
+        setPostalAddress(rev.postalCode);
         setSearched(true);
       });
     });
@@ -37,7 +37,7 @@ const MapComponent = ({
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestPermissionsAsync();
-      if (status !== "granted") {
+      if (status != "granted") {
         setErrorMsg("Permission to access location was denied");
         alert("You must enable location");
         navigation.navigate("InitialLogin");
@@ -91,6 +91,17 @@ const MapComponent = ({
     };
     searchGeopoint();
   }, []);
+
+  const addMarker = () => {
+    return searched ? (
+      <Marker
+        index={0}
+        coordinate={longitudeLatitude.coords}
+        title={postalAddress}
+        isPreselected={true}
+      />
+    ) : null;
+  };
   return (
     <View style={{ backgroundColor: "#f9e9d2" }}>
       {preGeopoint == null ? (
@@ -125,14 +136,7 @@ const MapComponent = ({
           }}
           style={style.map}
         >
-          {searched ? (
-            <Marker
-              index={0}
-              coordinate={longitudeLatitude.coords}
-              title={postalAddress}
-              isPreselected={true}
-            />
-          ) : null}
+          {addMarker()}
         </MapView>
       ) : (
         <Text>Allow location permissions</Text>

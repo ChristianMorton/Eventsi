@@ -7,11 +7,8 @@ import {
   RefreshControl,
   Dimensions,
   StatusBar,
-  Image,
-  Button,
 } from "react-native";
 import "firebase/storage";
-import * as firebase from "firebase";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getEventPosts } from "../redux/actions/events";
@@ -26,14 +23,8 @@ const PostsTab = ({ getEventPosts, id, events }) => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    //getEventMedia(id);
-    // setEventMedia(events.currentEventMedia);
-    //getURI();
-    //getEventMediaFunction();
     wait(2000).then(() => setRefreshing(false));
   }, []);
-
-  const storage = firebase.storage();
 
   const renderItem = (item) => {
     return (
