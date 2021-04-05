@@ -1,10 +1,8 @@
 import React, { useCallback, useState, useEffect } from "react";
 import {
   SafeAreaView,
-  Text,
   StyleSheet,
   FlatList,
-  View,
   StatusBar,
   RefreshControl,
 } from "react-native";
@@ -13,7 +11,6 @@ import { bindActionCreators } from "redux";
 import EventListPanel from "../components/EventListPanel";
 import { getMyEvents } from "../redux/actions/events";
 import "firebase/firestore";
-import * as firebase from "firebase";
 import { useFocusEffect } from "@react-navigation/native";
 
 const wait = (timeout) => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat";
 import { db } from "../config/Firebase";
 import { connect } from "react-redux";
@@ -49,8 +49,8 @@ const ChatTab = ({ id, currentuser }) => {
   };
 
   const sendMessage = (messages) => {
-    for (let i = 0; i < messages.length; i++) {
-      const { text, user } = messages[i];
+    for (let value of messages) {
+      const { text, user } = value;
       const { _id } = user;
       const message = {
         text,
@@ -62,22 +62,6 @@ const ChatTab = ({ id, currentuser }) => {
 
       chatCollection.add(message);
     }
-  };
-
-  const parse = (snapshot) => {
-    // 1.
-    const { timestamp: numberStamp, text, user } = snapshot.val();
-    const { key: _id } = snapshot;
-    // 2.
-    const timestamp = new Date(numberStamp);
-    // 3.
-    const message = {
-      _id,
-      timestamp,
-      text,
-      user,
-    };
-    return message;
   };
 
   const user = () => {

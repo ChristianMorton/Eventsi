@@ -70,8 +70,6 @@ export const createEvent = (eventData) => {
 };
 
 export const getEventPosts = (idOfEvent) => {
-  const storage = Firebase.storage();
-
   return async (dispatch, getState) => {
     try {
       const uid = Firebase.auth().currentUser.uid;
@@ -146,8 +144,6 @@ export const getEventMedia = (idOfEvent) => {
 };
 
 export const joinEvent = (idOfEvent) => {
-  const storage = Firebase.storage();
-
   return async (dispatch, getState) => {
     try {
       const uid = Firebase.auth().currentUser.uid;
@@ -156,7 +152,7 @@ export const joinEvent = (idOfEvent) => {
         const invitedVariable = {
           [testuid]: { status: "invited", name: getState().user.name },
         };
-        const res = await db
+        await db
           .collection("events")
           .doc(idOfEvent)
           .set({ invited: invitedVariable }, { merge: true });
@@ -171,8 +167,6 @@ export const joinEvent = (idOfEvent) => {
 };
 
 export const changeStatus = (idOfEvent, status) => {
-  const storage = Firebase.storage();
-
   return async (dispatch, getState) => {
     try {
       const uid = Firebase.auth().currentUser.uid;
@@ -181,7 +175,7 @@ export const changeStatus = (idOfEvent, status) => {
         const invitedVariable = {
           [testuid]: { status: status, name: getState().user.name },
         };
-        const res = await db
+        await db
           .collection("events")
           .doc(idOfEvent)
           .set({ invited: invitedVariable }, { merge: true });

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -8,7 +8,6 @@ import {
   Dimensions,
   Button,
 } from "react-native";
-import AppButton from "../components/AppButton";
 import * as ImagePicker from "expo-image-picker";
 import "firebase/storage";
 import * as firebase from "firebase";
@@ -18,10 +17,8 @@ import { v4 as uuidv4 } from "uuid";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getEventMedia } from "../redux/actions/events";
-import GalleryComponent from "../components/GalleryComponent";
 import EventsTabs from "../navigation/EventsTabs";
 import Clipboard from "expo-clipboard";
-import ImageButton from "../components/ImageButton";
 import ChangeInvitedStatus from "../components/ChangeInvitedStatus";
 
 const EventDetailScreen = ({
@@ -46,9 +43,8 @@ const EventDetailScreen = ({
   const chooseImage = async () => {
     let result = await ImagePicker.launchCameraAsync();
     console.log(result);
-    //let result = await ImagePicker.launchImageLibraryAsync();
     if (!result.cancelled) {
-      await uploadImage(result.uri);
+      uploadImage(result.uri);
     }
   };
   const copyToClipboard = () => {
@@ -64,16 +60,12 @@ const EventDetailScreen = ({
         .storage()
         .ref()
         .child("events/" + id + "/media/" + uuid);
-      const res = await db
-        .collection("events")
-        .doc(id)
-        .collection("media")
-        .add({
-          description: "test desc",
-          name: user.name,
-          slug: uuid,
-          user: user.uid,
-        });
+      await db.collection("events").doc(id).collection("media").add({
+        description: "test desc",
+        name: user.name,
+        slug: uuid,
+        user: user.uid,
+      });
       return ref.put(blob);
     } catch (error) {
       alert(error);
@@ -86,7 +78,7 @@ const EventDetailScreen = ({
         const {
           status,
         } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (status !== "granted") {
+        if (status != "granted") {
           alert("Sorry, we need camera roll permissions to make this work!");
         }
       }

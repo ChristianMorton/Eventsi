@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, Pressable } from "react-native";
+import { StyleSheet, Text, Pressable } from "react-native";
 
 const AppButton = ({ title, onPress }) => {
   return (

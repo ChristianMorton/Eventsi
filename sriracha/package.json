@@ -7,7 +7,8 @@
     "start": "react-native start",
     "test": "jest",
     "storybook": "start-storybook -p 7007",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "sonar":"sonar-scanner -Dsonar.projectKey=eventsi -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.login=9be23b2a6c8ff149e6e1fcafe069cd0802922a5a"
   },
   "dependencies": {
     "@react-native-community/datetimepicker": "3.0.4",

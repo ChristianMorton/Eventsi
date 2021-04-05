@@ -5,7 +5,6 @@ import DetailsTab from "../components/DetailsTab";
 import GalleryComponent from "../components/GalleryComponent";
 import PostsTab from "../components/PostsTab";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Tab = createMaterialTopTabNavigator();
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, StyleSheet, Button } from "react-native";
 import AppTextInput from "./AppTextInput";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -34,7 +34,7 @@ const CreatePost = ({ idOfEvent, user }) => {
     <View>
       <AppTextInput
         value={text}
-        onChangeText={(text) => setText(text)}
+        onChangeText={(changedText) => setText(changedText)}
         leftIcon="account"
         placeholder="Enter Post"
         autoCapitalize="none"

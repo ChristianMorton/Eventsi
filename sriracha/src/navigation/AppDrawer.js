@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import SettingsScreen from "../screens/SettingsScreen";
 import { AppNavigator } from "./AppNavigator";
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -10,7 +10,6 @@ import {
   login,
   getUser,
 } from "../redux/actions/user";
-import HomeScreen from "../screens/HomeScreen";
 import StorybookUIRoot from "../../storybook";
 
 const Drawer = createDrawerNavigator();
