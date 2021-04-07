@@ -60,94 +60,97 @@ const HostEventScreen = ({ navigation, createEvent }) => {
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <ScrollView>
-        <AppTextInput
-          value={nameOfEvent}
-          onChangeText={(text) => setNameOfEvent(text)}
-          //leftIcon="account"
-          placeholder="Enter Name of Event"
-          autoCapitalize="none"
-          keyboardType="default"
-          textContentType="none"
-        />
-        <AppTextInput
-          value={descriptionOfEvent}
-          onChangeText={(text) => setDescriptionOfEvent(text)}
-          //leftIcon="account"
-          placeholder="Enter Description of Event"
-          autoCapitalize="none"
-          keyboardType="default"
-          textContentType="none"
-        />
-        <View style={styles.switchContainer}>
-          <Text style={styles.title}>Dress code? </Text>
-          <Switch
-            trackColor={{ false: "#767577", true: "#81b0ff" }}
-            thumbColor={isDressCodeEnabled ? "#f5dd4b" : "#f4f3f4"}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={toggleDressCodeSwitch}
-            value={isDressCodeEnabled}
-          />
-        </View>
-        {isDressCodeEnabled ? (
+        <View style={styles.container}>
           <AppTextInput
-            value={dressCode}
-            onChangeText={(text) => setDressCode(text)}
+            value={nameOfEvent}
+            onChangeText={(text) => setNameOfEvent(text)}
             //leftIcon="account"
-            placeholder="Enter Dress Code"
+            placeholder="Enter Name of Event"
             autoCapitalize="none"
             keyboardType="default"
             textContentType="none"
           />
-        ) : null}
-        <DateTimeInput setDate={setDate} date={date} isDateOfEvent={true} />
-        <View style={styles.switchContainer}>
-          <Text style={styles.title}>Set an end date? </Text>
-          <Switch
-            trackColor={{ false: "#767577", true: "#81b0ff" }}
-            thumbColor={isEndDateEnabled ? "#f5dd4b" : "#f4f3f4"}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={toggleEndDateSwitch}
-            value={isEndDateEnabled}
+          <AppTextInput
+            value={descriptionOfEvent}
+            onChangeText={(text) => setDescriptionOfEvent(text)}
+            //leftIcon="account"
+            placeholder="Enter Description of Event"
+            autoCapitalize="none"
+            keyboardType="default"
+            textContentType="none"
+            description={true}
           />
+          <View style={styles.switchContainer}>
+            <Text style={styles.title}>Dress code? </Text>
+            <Switch
+              trackColor={{ false: "#767577", true: "#81b0ff" }}
+              thumbColor={isDressCodeEnabled ? "#f5dd4b" : "#f4f3f4"}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={toggleDressCodeSwitch}
+              value={isDressCodeEnabled}
+            />
+          </View>
+          {isDressCodeEnabled ? (
+            <AppTextInput
+              value={dressCode}
+              onChangeText={(text) => setDressCode(text)}
+              //leftIcon="account"
+              placeholder="Enter Dress Code"
+              autoCapitalize="none"
+              keyboardType="default"
+              textContentType="none"
+            />
+          ) : null}
+          <DateTimeInput setDate={setDate} date={date} isDateOfEvent={true} />
+          <View style={styles.switchContainer}>
+            <Text style={styles.title}>Set an end date? </Text>
+            <Switch
+              trackColor={{ false: "#767577", true: "#81b0ff" }}
+              thumbColor={isEndDateEnabled ? "#f5dd4b" : "#f4f3f4"}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={toggleEndDateSwitch}
+              value={isEndDateEnabled}
+            />
+          </View>
+          {isEndDateEnabled ? (
+            <DateTimeInput
+              setDate={setEndDate}
+              date={endDate}
+              isDateOfEvent={false}
+              isEndDate={true}
+            />
+          ) : null}
+          <View style={styles.switchContainer}>
+            <Text style={styles.title}>RSVP? </Text>
+            <Switch
+              trackColor={{ false: "#767577", true: "#81b0ff" }}
+              thumbColor={isReplyByDateEnabled ? "#f5dd4b" : "#f4f3f4"}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={toggleRSVPSwitch}
+              value={isReplyByDateEnabled}
+            />
+          </View>
+          {isReplyByDateEnabled ? (
+            <DateTimeInput
+              setDate={setReplyDate}
+              date={replyDate}
+              isDateOfEvent={false}
+            />
+          ) : null}
+          <MapComponent
+            longitudeLatitude={longitudeLatitude}
+            setLongitudeLatitude={setLongitudeLatitude}
+            style={{
+              map: {
+                width: Dimensions.get("window").width,
+                height: Dimensions.get("window").width,
+              },
+            }}
+            navigation={navigation}
+          />
+          <AppButton title="Create event" onPress={createEventButton} />
+          <StatusBar style="auto" />
         </View>
-        {isEndDateEnabled ? (
-          <DateTimeInput
-            setDate={setEndDate}
-            date={endDate}
-            isDateOfEvent={false}
-            isEndDate={true}
-          />
-        ) : null}
-        <View style={styles.switchContainer}>
-          <Text style={styles.title}>RSVP? </Text>
-          <Switch
-            trackColor={{ false: "#767577", true: "#81b0ff" }}
-            thumbColor={isReplyByDateEnabled ? "#f5dd4b" : "#f4f3f4"}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={toggleRSVPSwitch}
-            value={isReplyByDateEnabled}
-          />
-        </View>
-        {isReplyByDateEnabled ? (
-          <DateTimeInput
-            setDate={setReplyDate}
-            date={replyDate}
-            isDateOfEvent={false}
-          />
-        ) : null}
-        <MapComponent
-          longitudeLatitude={longitudeLatitude}
-          setLongitudeLatitude={setLongitudeLatitude}
-          style={{
-            map: {
-              width: Dimensions.get("window").width,
-              height: Dimensions.get("window").width,
-            },
-          }}
-          navigation={navigation}
-        />
-        <AppButton title="Create event" onPress={createEventButton} />
-        <StatusBar style="auto" />
       </ScrollView>
     </SafeAreaView>
   );
@@ -156,12 +159,11 @@ const HostEventScreen = ({ navigation, createEvent }) => {
 const styles = StyleSheet.create({
   safeAreaContainer: {
     flex: 1,
-    backgroundColor: "#f9e9d2",
+    backgroundColor: "#fff",
+    alignItems: "center",
   },
   container: {
-    flex: 1,
     alignItems: "center",
-    justifyContent: "center",
   },
   switchContainer: {
     flexDirection: "row",
