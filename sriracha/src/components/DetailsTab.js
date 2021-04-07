@@ -130,7 +130,7 @@ const DetailsTab = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#f9e9d2",
+    backgroundColor: "#fff",
     flex: 1,
   },
   centeredView: {

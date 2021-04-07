@@ -78,7 +78,7 @@ const ChatTab = ({ id, currentuser }) => {
       onSend={sendMessage}
       user={user()}
       scrollToBottom={true}
-      style={{ backgroundColor: "#f9e9d2" }}
+      style={{ backgroundColor: "#fff" }}
     />
   );
 };

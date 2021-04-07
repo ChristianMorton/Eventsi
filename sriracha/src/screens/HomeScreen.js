@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
-    backgroundColor: "#f9e9d2",
+    backgroundColor: "#fff",
   },
   item: {
     backgroundColor: "#f9c2ff",

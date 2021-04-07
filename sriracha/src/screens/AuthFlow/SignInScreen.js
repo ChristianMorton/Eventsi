@@ -93,7 +93,7 @@ const SignIn = ({
 const styles = StyleSheet.create({
   safeAreaContainer: {
     flex: 1,
-    backgroundColor: "#f9e9d2",
+    backgroundColor: "#fff",
   },
   container: {
     flex: 1,

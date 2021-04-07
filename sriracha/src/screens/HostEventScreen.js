@@ -83,9 +83,9 @@ const HostEventScreen = ({ navigation, createEvent }) => {
           <View style={styles.switchContainer}>
             <Text style={styles.title}>Dress code? </Text>
             <Switch
-              trackColor={{ false: "#767577", true: "#81b0ff" }}
-              thumbColor={isDressCodeEnabled ? "#f5dd4b" : "#f4f3f4"}
-              ios_backgroundColor="#3e3e3e"
+              trackColor={{ false: "#F2F2F2", true: "#F2F2F2" }}
+              thumbColor={"#7EACA7"}
+              ios_backgroundColor="#F2F2F2"
               onValueChange={toggleDressCodeSwitch}
               value={isDressCodeEnabled}
             />
@@ -105,9 +105,9 @@ const HostEventScreen = ({ navigation, createEvent }) => {
           <View style={styles.switchContainer}>
             <Text style={styles.title}>Set an end date? </Text>
             <Switch
-              trackColor={{ false: "#767577", true: "#81b0ff" }}
-              thumbColor={isEndDateEnabled ? "#f5dd4b" : "#f4f3f4"}
-              ios_backgroundColor="#3e3e3e"
+              trackColor={{ false: "#F2F2F2", true: "#F2F2F2" }}
+              thumbColor={"#7EACA7"}
+              ios_backgroundColor="#F2F2F2"
               onValueChange={toggleEndDateSwitch}
               value={isEndDateEnabled}
             />
@@ -123,9 +123,9 @@ const HostEventScreen = ({ navigation, createEvent }) => {
           <View style={styles.switchContainer}>
             <Text style={styles.title}>RSVP? </Text>
             <Switch
-              trackColor={{ false: "#767577", true: "#81b0ff" }}
-              thumbColor={isReplyByDateEnabled ? "#f5dd4b" : "#f4f3f4"}
-              ios_backgroundColor="#3e3e3e"
+              trackColor={{ false: "#F2F2F2", true: "#F2F2F2" }}
+              thumbColor={"#7EACA7"}
+              ios_backgroundColor="#F2F2F2"
               onValueChange={toggleRSVPSwitch}
               value={isReplyByDateEnabled}
             />
@@ -168,7 +168,9 @@ const styles = StyleSheet.create({
   switchContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
+    paddingHorizontal: "10%",
+    alignSelf: "stretch",
   },
   title: {
     fontSize: 20,

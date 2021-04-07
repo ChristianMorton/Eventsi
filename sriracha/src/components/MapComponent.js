@@ -106,7 +106,7 @@ const MapComponent = ({
     ) : null;
   };
   return (
-    <View style={{ backgroundColor: "#f9e9d2" }}>
+    <View style={{ backgroundColor: "#fff" }}>
       {preGeopoint == null ? (
         <View style={styles.searchBarContainer}>
           <View style={{ flex: 9 }}>
