@@ -55,7 +55,7 @@ const GalleryComponent = ({ id, getEventMedia, events, chooseImage }) => {
   }, []);
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#f9e9d2" }}>
+    <View style={{ flex: 1, backgroundColor: "#fff" }}>
       <FlatList
         numColumns={3}
         data={events}
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     bottom: 5,
   },
   flatList: {
-    backgroundColor: "#f9e9d2",
+    backgroundColor: "#fff",
   },
 });
 

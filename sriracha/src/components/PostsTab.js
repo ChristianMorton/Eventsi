@@ -41,7 +41,7 @@ const PostsTab = ({ getEventPosts, id, events }) => {
   }, []);
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#f9e9d2" }}>
+    <View style={{ flex: 1, backgroundColor: "#fff" }}>
       <CreatePost idOfEvent={id} />
 
       <FlatList
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight || 0,
   },
   item: {
-    backgroundColor: "#f9e9d2",
+    backgroundColor: "#fff",
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,

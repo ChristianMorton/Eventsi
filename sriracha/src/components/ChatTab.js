@@ -45,7 +45,7 @@ const ChatTab = ({ id, currentuser }) => {
   }, []);
 
   const getTimestamp = () => {
-    return new firebase.firestore.Timestamp.fromDate(new Date(Date.now()));
+    return firebase.firestore.Timestamp.fromDate(new Date(Date.now()));
   };
 
   const sendMessage = (messages) => {
@@ -78,7 +78,7 @@ const ChatTab = ({ id, currentuser }) => {
       onSend={sendMessage}
       user={user()}
       scrollToBottom={true}
-      style={{ backgroundColor: "#f9e9d2" }}
+      style={{ backgroundColor: "#fff" }}
     />
   );
 };

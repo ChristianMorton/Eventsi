@@ -29,7 +29,7 @@ const App = () => {
   }, []);
 
   const checkAuthState = async () => {
-    const user = await Firebase.auth().currentUser;
+    const user = Firebase.auth().currentUser;
     if (user) {
       console.log("User is signed in");
       setUserLoggedIn("loggedIn");

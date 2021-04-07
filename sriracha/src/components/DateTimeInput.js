@@ -8,6 +8,7 @@ import {
   SafeAreaView,
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const DateTimeInput = ({ setDate, date, isDateOfEvent, isEndDate = false }) => {
   const [mode, setMode] = useState("date");
@@ -32,44 +33,63 @@ const DateTimeInput = ({ setDate, date, isDateOfEvent, isEndDate = false }) => {
     showMode("time");
   };
 
+  const _dateInputString = () => {
+    if (isDateOfEvent) {
+      return "Starting Date ";
+    }
+    return isEndDate ? "Ending Date" : "Reply by Date";
+  };
+
+  const _timeInputString = () => {
+    if (isDateOfEvent) {
+      return "Starting Time ";
+    }
+    return isEndDate ? "Ending Time" : "Reply by Time";
+  };
+
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <View style={styles.container}>
-        <View>
-          <TouchableOpacity
-            style={styles.touchableOpacity}
-            onPress={showDatepicker}
-          >
-            <Text style={styles.dateInput}>
-              {isDateOfEvent
-                ? "Start date of event"
-                : isEndDate
-                ? "End date"
-                : "Reply by date"}
-              :{"  "}
-              {date.getDate()}/{date.getMonth() + 1}/
-              {date.getYear() < 2000 ? date.getYear() + 1900 : date.getYear()}
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View>
-          <TouchableOpacity
-            style={styles.touchableOpacity}
-            onPress={showTimepicker}
-          >
-            <Text style={styles.dateInput}>
-              {isDateOfEvent
-                ? "Start time of event"
-                : isEndDate
-                ? "End time"
-                : "Reply by time"}
-              :{"  "}
-              {date.getHours() < 10 ? "0" + date.getHours() : date.getHours()}:
-              {date.getMinutes() < 10
-                ? "0" + date.getMinutes()
-                : date.getMinutes()}
-            </Text>
-          </TouchableOpacity>
+        <View style={styles.pickerButtonsView}>
+          <View style={styles.pickerView}>
+            <Text>{_dateInputString()}</Text>
+            <TouchableOpacity
+              style={styles.touchableOpacity}
+              onPress={showDatepicker}
+            >
+              <Text style={styles.dateInput}>
+                {date.getDate()}/{date.getMonth() + 1}/
+                {date.getYear() < 2000 ? date.getYear() + 1900 : date.getYear()}
+              </Text>
+              <MaterialCommunityIcons
+                name={"calendar"}
+                size={25}
+                color="#F69970"
+                style={styles.icon}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.pickerView}>
+            <Text>{_timeInputString()}</Text>
+            <TouchableOpacity
+              style={styles.touchableOpacity}
+              onPress={showTimepicker}
+            >
+              <Text style={styles.dateInput}>
+                {date.getHours() < 10 ? "0" + date.getHours() : date.getHours()}
+                :
+                {date.getMinutes() < 10
+                  ? "0" + date.getMinutes()
+                  : date.getMinutes()}
+              </Text>
+              <MaterialCommunityIcons
+                name={"clock"}
+                size={25}
+                color="#F69970"
+                style={styles.icon}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
         {show && (
           <DateTimePicker
@@ -93,10 +113,20 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "600",
   },
+  pickerButtonsView: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "stretch",
+    justifyContent: "center",
+  },
+  pickerView: {
+    width: "50%",
+    alignItems: "center",
+  },
   safeAreaContainer: {
     flex: 1,
-    backgroundColor: "#f9e9d2",
-    alignItems: "center",
+    backgroundColor: "#fff",
+    alignItems: "stretch",
   },
   container: {
     flex: 1,
@@ -105,12 +135,19 @@ const styles = StyleSheet.create({
   },
   touchableOpacity: {
     marginVertical: 10,
-    borderRadius: 25,
-    justifyContent: "center",
+    borderRadius: 14,
+    justifyContent: "space-around",
     alignItems: "center",
     padding: 15,
+    marginHorizontal: 20,
     width: "80%",
-    backgroundColor: "#9AB7D2",
+    shadowColor: "rgba(0,0,0, .2)", // IOS
+    shadowOffset: { height: 1, width: 1 }, // IOS
+    shadowOpacity: 0.3, // IOS
+    shadowRadius: 4, //IOS
+    backgroundColor: "#fff",
+    elevation: 3, // Android
+    flexDirection: "row",
   },
 });
 

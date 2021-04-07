@@ -1,5 +1,4 @@
 import React from "react";
-import HomeScreen from "../screens/HomeScreen";
 import HostEventScreen from "../screens/HostEventScreen";
 import InitialScreen from "../screens/InitialScreen";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -19,7 +18,10 @@ export const AppNavigator = (props) => {
           />
         )}
       </AppStack.Screen>
-      <AppStack.Screen name="HostEventScreen">
+      <AppStack.Screen
+        name="HostEventScreen"
+        options={{ title: "Events Details" }}
+      >
         {(screenProps) => (
           <HostEventScreen
             {...screenProps}

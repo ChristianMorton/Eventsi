@@ -1,10 +1,16 @@
-// May need to delete this component later
-
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import {
+  View,
+  StyleSheet,
+  SafeAreaView,
+  Pressable,
+  Text,
+  Dimensions,
+} from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import AppTextInput from "./AppTextInput";
 import * as Location from "expo-location";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const _formatLocationDataString = (dataArray) => {
   var tempPostalAddress = "";
@@ -26,42 +32,46 @@ const _formatLocationDataString = (dataArray) => {
   return tempPostalAddress;
 };
 
-const MapComponent = ({
-  style,
+const MapModal = ({
+  navigation,
+  toggleModal,
   longitudeLatitude,
   setLongitudeLatitude,
+  setSearchedLocation = null,
   preGeopoint = null,
-  navigation,
 }) => {
   const [searchLocation, setSearchLocation] = useState("");
   const [postalAddress, setPostalAddress] = useState("");
-  const [arrayOfPossibleLocations, setArrayOfPossibleLocations] = useState(
-    null
-  ); // Here because we might use in future tbh
 
   const [searched, setSearched] = useState(false);
   const searchForLocation = async () => {
-    Location.geocodeAsync(searchLocation).then((res) => {
-      setArrayOfPossibleLocations(res);
-      setLongitudeLatitude({
-        coords: { longitude: res[0].longitude, latitude: res[0].latitude },
-      });
-      Location.reverseGeocodeAsync({
-        longitude: res[0].longitude,
-        latitude: res[0].latitude,
-      }).then((rev) => {
-        setPostalAddress(rev.postalCode);
-        setSearched(true);
-      });
-    });
+    Location.geocodeAsync(searchLocation)
+      .then((res) => {
+        console.log(res);
+        setLongitudeLatitude({
+          coords: { longitude: res[0].longitude, latitude: res[0].latitude },
+        });
+        Location.reverseGeocodeAsync({
+          longitude: res[0].longitude,
+          latitude: res[0].latitude,
+        }).then((rev) => {
+          const postAddress = _formatLocationDataString(rev);
+          setPostalAddress(postAddress);
+          if (setSearchedLocation != null) {
+            setSearchedLocation(postAddress);
+          }
+          setSearched(true);
+        });
+      })
+      .catch((error) => console.log(error));
   };
 
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestPermissionsAsync();
       if (status != "granted") {
-        setErrorMsg("Permission to access location was denied");
         alert("You must enable location");
+        _closeMap();
         navigation.navigate("InitialLogin");
         return;
       }
@@ -103,35 +113,17 @@ const MapComponent = ({
         index={0}
         coordinate={longitudeLatitude.coords}
         title={postalAddress}
-        isPreselected={true}
+        isPreselected={false}
       />
     ) : null;
   };
 
-  return (
-    <View style={{ backgroundColor: "#fff" }}>
-      {preGeopoint == null ? (
-        <View style={styles.searchBarContainer}>
-          <View style={{ flex: 9 }}>
-            <AppTextInput
-              value={searchLocation}
-              onChangeText={(text) => setSearchLocation(text)}
-              leftIcon="map-marker"
-              placeholder="Search For Location"
-              autoCapitalize="none"
-              keyboardType="default"
-              textContentType="none"
-            />
-            <Button
-              style={{ flex: 1, color: "#9AB7D2" }}
-              color={"#9AB7D2"}
-              title="Search"
-              onPress={searchForLocation}
-            />
-          </View>
-        </View>
-      ) : null}
+  const _closeMap = () => {
+    toggleModal();
+  };
 
+  return (
+    <SafeAreaView style={styles.safeAreaView}>
       {longitudeLatitude ? (
         <MapView
           region={{
@@ -140,22 +132,65 @@ const MapComponent = ({
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}
-          style={style.map}
+          style={styles.map}
         >
           {addMarker()}
         </MapView>
       ) : (
         <Text>Allow location permissions</Text>
       )}
-    </View>
+      <Pressable onPress={_closeMap} style={styles.pressable}>
+        <MaterialCommunityIcons
+          name={"arrow-left"}
+          size={40}
+          color="#6e6869"
+          style={styles.icon}
+        />
+      </Pressable>
+
+      {preGeopoint == null ? (
+        <View style={styles.searchBarContainer}>
+          <AppTextInput
+            value={searchLocation}
+            onChangeText={(text) => setSearchLocation(text)}
+            leftIcon="magnify"
+            placeholder="Search For Location"
+            autoCapitalize="none"
+            keyboardType="default"
+            textContentType="none"
+            onSubmitEditing={() => searchForLocation()}
+            multiline={false}
+          />
+        </View>
+      ) : null}
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safeAreaView: {
+    flex: 1,
+    //width: Dimensions.get("window").width,
+    //height: Dimensions.get("window").height,
+  },
   searchBarContainer: {
     flexDirection: "row",
-    flex: 10,
+    position: "absolute",
+    justifyContent: "center",
+    alignContent: "center",
+    width: Dimensions.get("window").width,
+    top: 50,
+  },
+  pressable: {
+    position: "absolute",
+    top: 10,
+    left: "5%",
+  },
+  icon: {},
+  map: {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
   },
 });
 
-export default MapComponent;
+export default MapModal;

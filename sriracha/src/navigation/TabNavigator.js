@@ -24,7 +24,7 @@ const TabNavigator = ({ updateAuthState, getUser }) => {
         inactiveTintColor: "#fff",
       }}
       screenOptions={{
-        cardStyle: { backgroundColor: "#f9e9d2" },
+        cardStyle: { backgroundColor: "#fff" },
       }}
     >
       <Tab.Screen

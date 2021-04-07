@@ -31,14 +31,21 @@ const EventsTabs = ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === "Details") {
-            iconName = focused ? "information" : "information-outline";
-          } else if (route.name === "Posts") {
-            iconName = focused ? "note-multiple" : "note-multiple-outline";
-          } else if (route.name === "Gallery") {
-            iconName = focused ? "image-multiple" : "image-multiple-outline";
-          } else if (route.name === "Chat") {
-            iconName = focused ? "chat" : "chat-outline";
+          switch (route.name) {
+            case "Details":
+              iconName = focused ? "information" : "information-outline";
+              break;
+            case "Posts":
+              iconName = focused ? "note-multiple" : "note-multiple-outline";
+              break;
+            case "Gallery":
+              iconName = focused ? "image-multiple" : "image-multiple-outline";
+              break;
+            case "Chat":
+              iconName = focused ? "chat" : "chat-outline";
+              break;
+            default:
+              break;
           }
 
           // You can return any component that you like here!
