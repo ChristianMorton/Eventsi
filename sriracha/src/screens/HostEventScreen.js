@@ -7,7 +7,8 @@ import {
   ScrollView,
   Switch,
   View,
-  Dimensions,
+  Pressable,
+  Modal,
 } from "react-native";
 import DateTimeInput from "../components/DateTimeInput";
 import AppTextInput from "../components/AppTextInput";
@@ -17,7 +18,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import "firebase/firestore";
 import * as firebase from "firebase";
-import MapComponent from "../components/MapComponent";
+import MapModal from "../components/MapModal";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const HostEventScreen = ({ navigation, createEvent }) => {
   const [nameOfEvent, setNameOfEvent] = useState("");
@@ -30,6 +32,8 @@ const HostEventScreen = ({ navigation, createEvent }) => {
   const [replyDate, setReplyDate] = useState(new Date(Date.now()));
   const [isReplyByDateEnabled, setIsReplyByDateEnabled] = useState(false);
   const [longitudeLatitude, setLongitudeLatitude] = useState(null);
+  const [mapVisible, setMapVisible] = useState(false);
+  const [searchedLocation, setSearchedLocation] = useState(null);
 
   const toggleRSVPSwitch = () =>
     setIsReplyByDateEnabled((previousState) => !previousState);
@@ -54,7 +58,11 @@ const HostEventScreen = ({ navigation, createEvent }) => {
       endTime: firebase.firestore.Timestamp.fromDate(endDate),
     });
     navigation.goBack();
-    navigation.navigate("Show Events");
+    navigation.navigate("Your Events");
+  };
+
+  const _toggleMap = () => {
+    setMapVisible(!mapVisible);
   };
 
   return (
@@ -137,17 +145,24 @@ const HostEventScreen = ({ navigation, createEvent }) => {
               isDateOfEvent={false}
             />
           ) : null}
-          <MapComponent
-            longitudeLatitude={longitudeLatitude}
-            setLongitudeLatitude={setLongitudeLatitude}
-            style={{
-              map: {
-                width: Dimensions.get("window").width,
-                height: Dimensions.get("window").width,
-              },
-            }}
-            navigation={navigation}
-          />
+          <Pressable style={styles.mapButton} onPress={_toggleMap}>
+            <Text>{searchedLocation ? searchedLocation : "Location"}</Text>
+            <MaterialCommunityIcons
+              name={"map-marker"}
+              size={40}
+              color="#F69970"
+              style={styles.icon}
+            />
+          </Pressable>
+          <Modal animationType="slide" transparent={false} visible={mapVisible}>
+            <MapModal
+              longitudeLatitude={longitudeLatitude}
+              setLongitudeLatitude={setLongitudeLatitude}
+              navigation={navigation}
+              toggleModal={_toggleMap}
+              setSearchedLocation={setSearchedLocation}
+            />
+          </Modal>
           <AppButton title="Create event" onPress={createEventButton} />
           <StatusBar style="auto" />
         </View>
@@ -178,6 +193,23 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     marginVertical: 15,
   },
+  mapButton: {
+    marginVertical: 10,
+    borderRadius: 14,
+    justifyContent: "space-around",
+    alignItems: "center",
+    padding: 15,
+    marginHorizontal: 20,
+    width: "80%",
+    shadowColor: "rgba(0,0,0, .2)", // IOS
+    shadowOffset: { height: 1, width: 1 }, // IOS
+    shadowOpacity: 0.3, // IOS
+    shadowRadius: 4, //IOS
+    backgroundColor: "#fff",
+    elevation: 3, // Android
+    flexDirection: "row",
+  },
+  icon: {},
 });
 
 const mapDispatchToProps = (dispatch) => {

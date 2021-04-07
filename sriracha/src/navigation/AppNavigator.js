@@ -18,7 +18,10 @@ export const AppNavigator = (props) => {
           />
         )}
       </AppStack.Screen>
-      <AppStack.Screen name="HostEventScreen">
+      <AppStack.Screen
+        name="HostEventScreen"
+        options={{ title: "Events Details" }}
+      >
         {(screenProps) => (
           <HostEventScreen
             {...screenProps}

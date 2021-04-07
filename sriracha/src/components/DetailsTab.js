@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import DetailsText from "./DetailsText";
 import DressCodeModal from "./DressCodeModal";
-import MapComponent from "./MapComponent";
+import MapModal from "./MapModal";
 import RSVPStatusPanel from "./RSVPStatusPanel";
 import CircleShape from "./shapes/CircleShape";
 import SquareShape from "./shapes/SquareShape";
@@ -58,26 +58,15 @@ const DetailsTab = ({
           visible={mapModalVisible}
         >
           <View style={{ backgroundColor: "#fff " }}>
-            <MapComponent
+            <MapModal
               longitudeLatitude={longitudeLatitude}
               setLongitudeLatitude={setLongitudeLatitude}
-              style={{
-                map: {
-                  width: Dimensions.get("window").width,
-                  height: Dimensions.get("window").height - 70,
-                },
-              }}
               navigation={navigation}
               preGeopoint={Location}
-            />
-            <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-              onPress={() => {
+              toggleModal={() => {
                 setMapModalVisible(!mapModalVisible);
               }}
-            >
-              <Text style={styles.textStyle}>Hide Map</Text>
-            </TouchableHighlight>
+            />
           </View>
         </Modal>
         <Modal
