@@ -1,5 +1,4 @@
 import React from "react";
-import HomeScreen from "../screens/HomeScreen";
 import HostEventScreen from "../screens/HostEventScreen";
 import InitialScreen from "../screens/InitialScreen";
 import { createStackNavigator } from "@react-navigation/stack";

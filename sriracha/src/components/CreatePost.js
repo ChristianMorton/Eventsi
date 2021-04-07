@@ -16,7 +16,7 @@ const CreatePost = ({ idOfEvent, user }) => {
   const [text, setText] = useState("");
 
   const getTimestamp = () => {
-    return new firebase.firestore.Timestamp.fromDate(new Date(Date.now()));
+    return firebase.firestore.Timestamp.fromDate(new Date(Date.now()));
   };
 
   const sendPost = () => {

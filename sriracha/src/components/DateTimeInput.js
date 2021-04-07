@@ -32,6 +32,13 @@ const DateTimeInput = ({ setDate, date, isDateOfEvent, isEndDate = false }) => {
     showMode("time");
   };
 
+  const _dateInputString = () => {
+    if (isDateOfEvent) {
+      return "Start date of event";
+    }
+    return isEndDate ? "End date" : "ReplyByDate";
+  };
+
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <View style={styles.container}>
@@ -41,12 +48,7 @@ const DateTimeInput = ({ setDate, date, isDateOfEvent, isEndDate = false }) => {
             onPress={showDatepicker}
           >
             <Text style={styles.dateInput}>
-              {isDateOfEvent
-                ? "Start date of event"
-                : isEndDate
-                ? "End date"
-                : "Reply by date"}
-              :{"  "}
+              {_dateInputString()} :{"  "}
               {date.getDate()}/{date.getMonth() + 1}/
               {date.getYear() < 2000 ? date.getYear() + 1900 : date.getYear()}
             </Text>
@@ -58,12 +60,7 @@ const DateTimeInput = ({ setDate, date, isDateOfEvent, isEndDate = false }) => {
             onPress={showTimepicker}
           >
             <Text style={styles.dateInput}>
-              {isDateOfEvent
-                ? "Start time of event"
-                : isEndDate
-                ? "End time"
-                : "Reply by time"}
-              :{"  "}
+              {_dateInputString()}:{"  "}
               {date.getHours() < 10 ? "0" + date.getHours() : date.getHours()}:
               {date.getMinutes() < 10
                 ? "0" + date.getMinutes()

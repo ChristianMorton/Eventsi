@@ -4,6 +4,26 @@ import MapView, { Marker } from "react-native-maps";
 import AppTextInput from "./AppTextInput";
 import * as Location from "expo-location";
 
+const _formatLocationDataString = (dataArray) => {
+  var tempPostalAddress = "";
+  if (dataArray[0].name != null) {
+    tempPostalAddress += dataArray[0].name + " ";
+  }
+  if (dataArray[0].district != null) {
+    tempPostalAddress += dataArray[0].district + " ";
+  }
+  if (dataArray[0].street != null) {
+    tempPostalAddress += dataArray[0].street;
+  }
+  if (dataArray[0].region != null) {
+    tempPostalAddress += ", " + dataArray[0].region;
+  }
+  if (dataArray[0].postalCode != null) {
+    tempPostalAddress += ", " + dataArray[0].postalCode + " ";
+  }
+  return tempPostalAddress;
+};
+
 const MapComponent = ({
   style,
   longitudeLatitude,
@@ -66,24 +86,7 @@ const MapComponent = ({
           latitude: preGeopoint.latitude,
         })
           .then((res) => {
-            var tempPostalAddress = "";
-            if (res[0].name != null) {
-              tempPostalAddress += res[0].name + " ";
-            }
-            if (res[0].district != null) {
-              tempPostalAddress += res[0].district + " ";
-            }
-            if (res[0].street != null) {
-              tempPostalAddress += res[0].street;
-            }
-            if (res[0].region != null) {
-              tempPostalAddress += ", " + res[0].region;
-            }
-            if (res[0].postalCode != null) {
-              tempPostalAddress += ", " + res[0].postalCode + " ";
-            }
-
-            setPostalAddress(tempPostalAddress);
+            setPostalAddress(_formatLocationDataString(res));
             setSearched(true);
           })
           .catch((err) => alert(err));

@@ -45,7 +45,7 @@ const ChatTab = ({ id, currentuser }) => {
   }, []);
 
   const getTimestamp = () => {
-    return new firebase.firestore.Timestamp.fromDate(new Date(Date.now()));
+    return firebase.firestore.Timestamp.fromDate(new Date(Date.now()));
   };
 
   const sendMessage = (messages) => {
