@@ -100,6 +100,7 @@ const DateTimeInput = ({ setDate, date, isDateOfEvent, isEndDate = false }) => {
             is24Hour={true}
             display="default"
             onChange={onChange}
+            minimumDate={new Date(Date.now())}
           />
         )}
       </View>
