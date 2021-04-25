@@ -11,4 +11,5 @@ storiesOf("Upcoming event panel", module)
       {story()}
     </View>
   ))
-  .add("default", () => <UpcomingEventPanel />);
+  .add("default", () => <UpcomingEventPanel isBookmarked={false} />)
+  .add("Bookmarked", () => <UpcomingEventPanel isBookmarked={true} />);

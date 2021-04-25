@@ -8,7 +8,7 @@
     "test": "jest",
     "storybook": "start-storybook -p 7007",
     "build-storybook": "build-storybook",
-    "sonar":"sonar-scanner -Dsonar.projectKey=eventsi -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.login=9be23b2a6c8ff149e6e1fcafe069cd0802922a5a"
+    "sonar": "sonar-scanner -Dsonar.projectKey=eventsi -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.login=9be23b2a6c8ff149e6e1fcafe069cd0802922a5a"
   },
   "dependencies": {
     "@react-native-community/datetimepicker": "3.0.4",
@@ -49,7 +49,8 @@
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "react-native-svg": "12.1.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",

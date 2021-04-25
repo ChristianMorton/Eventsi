@@ -1,6 +1,5 @@
 import React from "react";
 import SettingsScreen from "../screens/SettingsScreen";
-import { AppNavigator } from "./AppNavigator";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -11,6 +10,7 @@ import {
   getUser,
 } from "../redux/actions/user";
 import StorybookUIRoot from "../../storybook";
+import TabNavigator from "./TabNavigator";
 
 const Drawer = createDrawerNavigator();
 
@@ -19,7 +19,7 @@ const AppDrawer = ({ updateAuthState, getUser }) => {
     <Drawer.Navigator initialRouteName="Home">
       <Drawer.Screen name="Home">
         {(screenProps) => (
-          <AppNavigator {...screenProps} updateAuthState={updateAuthState} />
+          <TabNavigator {...screenProps} updateAuthState={updateAuthState} />
         )}
       </Drawer.Screen>
 

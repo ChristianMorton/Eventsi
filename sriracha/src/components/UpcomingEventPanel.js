@@ -1,8 +1,14 @@
-import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, View, StyleSheet, Pressable } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const UpcomingEventPanel = () => {
+const UpcomingEventPanel = ({ isBookmarked }) => {
+  const [bookmarked, setBookmarked] = useState(false);
+
+  useEffect(() => {
+    setBookmarked(isBookmarked);
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.dateContainer}>
@@ -33,12 +39,14 @@ const UpcomingEventPanel = () => {
         </View>
       </View>
       <View style={styles.tagContainer}>
-        <MaterialCommunityIcons
-          name={"bookmark-outline"}
-          size={30}
-          color="#6e6869"
-          style={styles.icon}
-        />
+        <Pressable onPress={() => setBookmarked(!bookmarked)}>
+          <MaterialCommunityIcons
+            name={bookmarked ? "bookmark" : "bookmark-outline"}
+            size={30}
+            color={bookmarked ? "orange" : "#6e6869"}
+            style={styles.icon}
+          />
+        </Pressable>
       </View>
     </View>
   );
