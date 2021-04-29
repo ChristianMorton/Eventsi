@@ -13,7 +13,7 @@ export const getMyEvents = () => {
   return async (dispatch, getState) => {
     try {
       const currentuser = Firebase.auth().currentUser;
-
+      console.log("get my events");
       if (currentuser) {
         const res = await db
           .collection("events")

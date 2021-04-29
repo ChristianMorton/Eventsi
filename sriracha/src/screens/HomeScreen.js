@@ -5,13 +5,15 @@ import {
   FlatList,
   StatusBar,
   RefreshControl,
+  View,
+  Text,
+  SectionList,
 } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import EventListPanel from "../components/EventListPanel";
 import { getMyEvents } from "../redux/actions/events";
 import "firebase/firestore";
-import { useFocusEffect } from "@react-navigation/native";
+import UpcomingEventPanel from "../components/UpcomingEventPanel";
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -19,41 +21,57 @@ const wait = (timeout) => {
 
 const HomeScreen = ({ updateAuthState, events, getMyEvents }) => {
   const [refreshing, setRefreshing] = useState(false);
+  const [sectionListData, setSectionListData] = useState([]);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     wait(2000).then(() => setRefreshing(false));
   }, [refreshing]);
 
-  useFocusEffect(
-    useCallback(() => {
-      getMyEvents();
-    })
-  );
+  const _sortEventsToArray = () => {
+    if (events.event) {
+      var tempArray = [];
+      events.event.forEach((element) => {
+        tempArray.push({
+          month: element.time
+            .toDate()
+            .toLocaleDateString([], { month: "short" }),
+          data: [element],
+        });
+
+        setSectionListData(tempArray);
+      });
+    }
+  };
 
   useEffect(() => {
     getMyEvents();
+    _sortEventsToArray();
+    console.log(sectionListData);
   }, [refreshing]);
 
-  const renderItem = ({ item }) => (
-    <EventListPanel
-      name={item.name}
-      description={item.description}
-      time={item.time.toDate()}
-      eventInfo={item}
-    />
-  );
+  const RenderItem = ({ item }) => {
+    console.log(item);
+    return (
+      <View>
+        <UpcomingEventPanel eventInfo={item} />
+      </View>
+    );
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
-        data={events.event}
-        renderItem={renderItem}
+      <SectionList
+        sections={sectionListData}
+        renderItem={({ item }) => <RenderItem item={item} />}
         keyExtractor={(item) => item.id}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
+        renderSectionHeader={({ section: { month } }) => <Text>{month}</Text>}
+        initialNumToRender={3}
       />
+
       <StatusBar style="auto" />
     </SafeAreaView>
   );

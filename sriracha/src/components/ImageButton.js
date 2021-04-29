@@ -9,7 +9,7 @@ const ImageButton = ({ icon, onPress, style }) => {
         <MaterialCommunityIcons
           name={icon}
           size={40}
-          color="#6e6869"
+          color="#2B475C"
           style={styles.icon}
         />
       )}
