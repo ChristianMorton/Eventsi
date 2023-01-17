@@ -1,6 +1,6 @@
 # Evensi App
 
-An events app for both web and mobile in development by **Morton and Guy Productions Ltd**.
+An events app for both web and mobile NOT in development by
 
 # File Structure
 
